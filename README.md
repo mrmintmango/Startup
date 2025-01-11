@@ -18,11 +18,11 @@ The Game Vault is an online organizer for gamers of all kinds. If you are into v
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -43,9 +43,10 @@ sequenceDiagram
 
 ### Key features
 
-- Easy game organizing UI which allows for reviews and ratings
+- Easy game organization UI which allows for reviews and ratings
 - Game Timer that tracks play time and supports healthy gaming habits.
 - Connect wth friends and view their game vaults, including their ratings and reviews.
+- Add images of favorite moments for each game and comment on those memories.
 
 ### Technologies
 
