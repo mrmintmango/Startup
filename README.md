@@ -26,13 +26,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Did you know that the average american owns around 20 video games? That doesn't even include board games or card games! I believe I've made the perfect tool for game lovers of all kinds. It's called the Game Vault, the perfect online interface to support gamers in their quest to organize and express their love for all of their favorite games. Not only will it allow them to connect with friends, track play time, store favorite game memories, but the "game time" function also helps them develop healthy gaming habits. Gaming doesn't need to be disorganized, and with the Game Vault, the future of gaming looks secure. 
 
 ### Design
 
 ![Design image](Startup%20Sketches%20CS260.jpg)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The opening sign in page keeps everyone's vaults secure, and leads into the main vault page. The main vault page has multiple racks to swipe through, exploring video games, board games, card games, and other games. Users can add games that they've purchased and games that they want to get in the future, but can only rate and leave reviews on games that they've played before. Each game can be clicked to enter the game window, where a user can leave reviews and pictures of favorite moments they've had while playing that game. The game time window is basically a countdown timer where the user defines what game they are playing and are supposed to play until the timer runs out. The color of the timer can be edited by the user. The friends window lets the user add friends and see friends vaults. 
 
 ```mermaid
 sequenceDiagram
@@ -43,20 +43,21 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Easy game organizing UI which allows for reviews and ratings
+- Game Timer that tracks play time and supports healthy gaming habits.
+- Connect wth friends and view their game vaults, including their ratings and reviews.
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses correct HTML structure, including 5 HTML pages; login, main vault, individual game pages, game timer, friends page.
+- **CSS** - Simple clothing rack design allows user to swipe between games and scroll down to view more genres of games. Appealing individual game window layout and changeable colors for the game timer.
+- **JavaScript** - Provides login functionality and keeps track of play time for each game according to the timer. 
+- **React** - Each game icon is a button and users can input different star ratings, images, write reviews, and change the time details for the timer. 
+- **Service** - Uses the internet to autofill the game image for whichever game the user adds to their vault. Most likely will use the "Board Game Geek" API for other game related information. 
+- **DB/Login** - Stores login information and maps of the different games users add to their vaults and the information of each game. 
+- **WebSocket** - When a user clicks on a friends profile, they can view that friend's vault. 
 
 ## 🚀 AWS deliverable
 
