@@ -71,7 +71,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - I made a page for each part of my application. 
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
+- [x] **Proper HTML element usage** - I formated my pages correctly with heads, headers, bodies, and footers. I don't think I really needed main tags, and I also added a variety of elements to each page. 
 - [x] **Links** - I added links that take you to each page in my application and placeholder links for things I haven't learned how to implement yet. 
 - [x] **Text** - I added proper text to highlight key areas of the application; very self explanatory design. 
 - [x] **3rd party API placeholder** - I added a search bar to add new games based off a 3rd part API and I'll try to snatch pictures from that api to use in my UI too. 
