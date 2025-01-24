@@ -64,21 +64,21 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [the Game Vault](https://theGameVault.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I made a page for each part of my application. 
 - [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **Links** - I added links that take you to each page in my application and placeholder links for things I haven't learned how to implement yet. 
+- [x] **Text** - I added proper text to highlight key areas of the application; very self explanatory design. 
+- [x] **3rd party API placeholder** - I added a search bar to add new games based off a 3rd part API and I'll try to snatch pictures from that api to use in my UI too. 
+- [x] **Images** - I added placeholder images where profile pics will go and where games will be displayed. Hopefully I can figure out how to get images from a 3rd party api based off of a user search. 
+- [x] **Login placeholder** - I added a basic login and register page with nice buttons. I also added a forgot password link but it is currently not useful. Also only the Login button takes you to the next page because I haven't implemented the register button yet. 
+- [x] **DB data placeholder** - In the game info page a user can write reviews, rate games, record memories and choose to favorite a game or not; all this info will be sent to a DB for safe keeping. 
+- [x] **WebSocket placeholder** - The user can go to the friends page and click on a friend's link to view their vault, opening a connection to that friend's stored info. 
 
 ## 🚀 CSS deliverable
 
