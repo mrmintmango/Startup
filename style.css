@@ -1,0 +1,13 @@
+.navigation{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    background-color: aquamarine;
+    color: rgb(89, 12, 89);
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
+.navElement{
+    margin: 15px;
+    text-align: center;
+}
