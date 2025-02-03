@@ -24,3 +24,24 @@ li a:hover {
     background-color: #27f0a6;
     color: black;
 }
+footer{
+    background-color: #27f0a6;
+    overflow: hidden;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+footer a{
+    float: left;
+    display: flexbox;
+    color: #111;
+    text-align: center;
+    padding: 14px 16px;
+}
+footer p{
+    float: left;
+    display: flexbox;
+    color: #111;
+    text-align: center;
+    padding: 14px 16px;
+}
