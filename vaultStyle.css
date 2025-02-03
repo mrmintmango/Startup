@@ -1,3 +1,16 @@
+
+h2{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 5vw;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.center{
+    text-align: center;
+}
 div.scrollmenu{
     background-color: aliceblue;
 }
