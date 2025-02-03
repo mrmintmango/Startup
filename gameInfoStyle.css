@@ -1,0 +1,22 @@
+a{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+    background-color: aquamarine;
+}
+h2{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2em;
+    text-align: center;
+}
+.grid-container{
+    display: grid;
+    column-gap: 30px;
+    justify-content: space-evenly;
+}
+.item{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.item2{
+    grid-row-start: 2;
+}
