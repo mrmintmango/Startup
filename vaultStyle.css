@@ -34,3 +34,17 @@ div.scrollmenu a{
     padding: 14px;
     text-decoration: none;
 }
+img+b::after{
+    content: "name";
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    right: 20vw;
+    left: 20vw;
+    font-size: 0.75rem;
+    color: blue;
+}
+li .game{
+    align-items: center;
+    border-right: 1px solid #bbb;
+}
