@@ -8,9 +8,28 @@ h2{
     text-align: center;
     justify-content: center;
 }
+h3{
+    
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
 .center{
     text-align: center;
 }
 div.scrollmenu{
     background-color: aliceblue;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+}
+div.scrollmenu img{
+    padding: 10px;
+}
+div.scrollmenu a{
+    display: contents;
+    color: rgb(70, 254, 70);
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
 }
