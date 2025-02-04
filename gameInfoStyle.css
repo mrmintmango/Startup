@@ -1,21 +1,22 @@
 a{
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.5em;
+    font-size: 6vw;
     background-color: aquamarine;
-}
-body{
-    margin: 0;
-
 }
 h2{
     font-family: 'Courier New', Courier, monospace;
-    font-size: 2em;
+    font-size: 10vw;
     text-align: center;
 }
+body{
+    background-color: silver;
+}
 textarea{
-    height: 150px;
+    height: 30vw;
+    width: 30vw;
 }
 .grid-container{
+    font-size: 5vw;
     display: grid;
     column-gap: 0px;
     justify-content: center;
