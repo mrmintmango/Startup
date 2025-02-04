@@ -1,0 +1,56 @@
+h2{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3vw;
+    text-align: center;
+    text-decoration: underline;
+}
+h3{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2vw;
+    text-align: center;
+    text-decoration: none;
+}
+p{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2vw;
+    text-align: center;
+    text-decoration: none;
+}
+body{
+    background-color: silver;
+}
+.center{
+    text-align: center;
+}
+div.scrollmenu{
+    background-color: aliceblue;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 30px;
+}
+div.scrollmenu img{
+    height: 200px;
+    width: auto;
+    padding: 10px;
+}
+div.scrollmenu a{
+    display: contents;
+    color: rgb(70, 254, 70);
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+li .game{
+    align-items: center;
+    border-right: 1px solid #bbb;
+}
+button{
+    border-radius: 4px;
+    border-color: aquamarine;
+    background-color: silver;
+    padding: auto;
+}
+input[type="search"]{
+    width: 20vw;
+    height: 2vw;
+}
