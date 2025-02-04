@@ -1,5 +1,6 @@
 <head> 
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="GameTimeStyle.css"/>
    
     <ul class="navigation">
         <li><a href="index.html">Logout</a></li>
@@ -11,10 +12,12 @@
   </head>
   
 <body>
-  <div> What game are you plaing? </div>
-  <input type="search" id="search" placeholder="game name" name="varSearch" />
+  <div class="gameName">
+    <div> What game are you plaing? </div>
+    <input type="search" id="search" placeholder="game name" name="varSearch" />
+  </div>
   
-  <div><h1>1H 20M</h1></div>
+  <div class="clock"><p>1H 20M</p></div>
   <progress id="progress" max="100" value="75"></progress><div></div>
 
   <button type="button">Start</button><button type="button">Change</button><div></div>

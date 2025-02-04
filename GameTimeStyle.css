@@ -1,0 +1,22 @@
+h2{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 8vw;
+    text-align: center;
+    text-decoration: underline;
+}
+body{
+    background-color: silver;
+}
+.gameName{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 5vw;
+    text-align: center;
+}
+.clock{
+    font-size: 10vw;
+    border: 9px solid aquamarine;
+    margin: 5px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: bold;
+}
