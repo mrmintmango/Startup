@@ -12,6 +12,10 @@ body{
     font-size: 5vw;
     text-align: center;
 }
+input[type="search"]{
+    width: 40vw;
+    height: 3vw;
+}
 .clock{
     font-size: 10vw;
     border: 9px solid aquamarine;
