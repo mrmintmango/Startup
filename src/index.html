@@ -1,77 +1,16 @@
-<head> 
-<style>
-  h2{
-    font-family: sans-serif;
-    padding: 10px;
-    text-align: center;
-    align-content: center;
-    font-size: 30px;;
-    background-color: aquamarine;
-  }
-  body{
-    background-color: grey;
-  }
-  p{
-    font-family: sans-serif;
-  }
-  .login{
-    background-color: aliceblue;
-    padding: 2px;
-    font-size: 30px;
-  }
-  li{
-    font-family: sans-serif;
-    align-items: center;
-    text-align: center;
-  }
-  button{
-    height: 30px;
-    margin: 10px;
-    align-content: center;
-    text-align: center;
-    color: white;
-    background-color: rgb(9, 77, 60);
-  }
-  .wrapper{
-    text-align: center;
-    background-color: aliceblue;
-    padding:5px;
-    margin: 20px;
-  }
-  footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    min-height: 50px;
-    background-color: aquamarine;
-  }
-  .left{
-    text-align: left;
-  }
-  .right{
-    text-align: right;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
 
-    <h2>the Game Vault</h2>
+    <title>the Game Vault</title>
   </head>
   <body>
-    <div class="wrapper">
-  <p class="login"> Login </p>
-  <li>
-          <!-- Includes validation-->
-          <label for="text">Username: </label>
-          <input type="text" id="text" name="varText" placeholder="your name here" required pattern="[Aa].*" />
-        </li>
-        <li>
-          <label for="password">Password: </label>
-          <input type="password" id="password" placeholder="your password here" name="varPassword" />
-        </li>
-        <button type="button" onclick="location.href='vaultPage.html'">Register</button><button type="button" onclick="location.href='vaultPage.html'">Login</button><div></div>
-  <a href="https://www.wikihow.com/Improve-Your-Memory"> forgot username or password? </a>
-</div>
-</body>
-<footer>
-  <span class="left"><p>Created by: Ruben Matos</p></span>
-  <span class="right"><a href="https://github.com/mrmintmango/Startup">my Github!</a></span>
-</footer> 
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/index.jsx"></script>
+  </body>
+</html>
