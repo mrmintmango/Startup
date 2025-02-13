@@ -1,0 +1,51 @@
+h2{
+    font-family: sans-serif;
+    padding: 10px;
+    text-align: center;
+    align-content: center;
+    font-size: 30px;;
+    background-color: aquamarine;
+  }
+  body{
+    background-color: grey;
+  }
+  p{
+    font-family: sans-serif;
+  }
+  .login{
+    background-color: aliceblue;
+    padding: 2px;
+    font-size: 30px;
+  }
+  li{
+    font-family: sans-serif;
+    align-items: center;
+    text-align: center;
+  }
+  button{
+    height: 30px;
+    margin: 10px;
+    align-content: center;
+    text-align: center;
+    color: white;
+    background-color: rgb(9, 77, 60);
+  }
+  .wrapper{
+    text-align: center;
+    background-color: aliceblue;
+    padding:5px;
+    margin: 20px;
+  }
+  footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 50px;
+    background-color: aquamarine;
+  }
+  .left{
+    text-align: left;
+  }
+  .right{
+    text-align: right;
+  }

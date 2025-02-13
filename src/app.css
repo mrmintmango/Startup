@@ -1,25 +1,28 @@
 .body {
     display: flex;
     flex-direction: column;
-    min-width: 375px;
+    min-width: 60vw;
   }
 .navigation{
+    display: flex;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 10px 12px;
     overflow: hidden;
     background-color: #333;
 }
 li{
     float: left;
     align-items: center;
-    border-right: 1px solid #bbb;
+    padding: 2px;
+    border-right: 2px solid #bbb;
 }
 li a{
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    font-size: 5em;
+    padding: 10px 12px;
     text-decoration: none;
 }
 li a:hover {
@@ -34,19 +37,22 @@ footer{
     overflow: hidden;
     position: fixed;
     bottom: 0;
+    height: 4vw;
     width: 100%;
 }
 footer a{
-    float: left;
-    display: flexbox;
+    float: right;
+    display: flex;
     color: #111;
-    text-align: center;
-    padding: 14px 16px;
+    font-size: 5em;
+    text-align: right;
+    padding: 10px 12px;
 }
 footer p{
     float: left;
-    display: flexbox;
+    display: flex;
+    font-size: 5em;
     color: #111;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 12px;
 }

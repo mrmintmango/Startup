@@ -13,7 +13,7 @@ export default function App() {
     return (
       <BrowserRouter>
         <div className="body bg-dark text-light">
-            <ul class="navigation">
+            <ul className="navigation">
                 <li><NavLink to=''>Logout</NavLink></li>
                 <li><NavLink to='vault'>Vault</NavLink></li>
                 <li><NavLink to='time'>GameTime</NavLink></li>
@@ -31,8 +31,7 @@ export default function App() {
 
             <footer>
             <div></div>
-            <p>created by Ruben Matos</p>
-            <a href="https://github.com/mrmintmango/Startup"> my Github! </a>
+            <p>created by Ruben Matos</p><a href="https://github.com/mrmintmango/Startup"> my Github! </a>
             </footer>
         </div>;
       </BrowserRouter>

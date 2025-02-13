@@ -1,5 +1,5 @@
 import React from 'react';
-import './gameInfo.css';
+import './gameInfoStyle.css';
 
 export function Info() {
   return (
