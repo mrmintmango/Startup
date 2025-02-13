@@ -14,7 +14,7 @@ export default function App() {
       <BrowserRouter>
         <div className="body bg-dark text-light">
             <ul className="navigation">
-                <li><NavLink to=''>Logout</NavLink></li>
+                <li><NavLink to=''>Login</NavLink></li>
                 <li><NavLink to='vault'>Vault</NavLink></li>
                 <li><NavLink to='time'>GameTime</NavLink></li>
                 <li><NavLink to='friends'>Friends</NavLink></li>
