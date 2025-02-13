@@ -1,15 +1,9 @@
-.body {
-    display: flex;
-    flex-direction: column;
-    min-width: 60vw;
-  }
 .navigation{
     display: flex;
     list-style-type: none;
     margin: 0;
     padding: 10px 12px;
     overflow: hidden;
-    background-color: #333;
 }
 li{
     float: left;
@@ -21,7 +15,7 @@ li a{
     display: block;
     color: white;
     text-align: center;
-    font-size: 5em;
+    font-size: 2em;
     padding: 10px 12px;
     text-decoration: none;
 }
@@ -37,22 +31,22 @@ footer{
     overflow: hidden;
     position: fixed;
     bottom: 0;
-    height: 4vw;
+    height: 3vw;
     width: 100%;
 }
 footer a{
     float: right;
     display: flex;
     color: #111;
-    font-size: 5em;
+    font-size: 2em;
     text-align: right;
-    padding: 10px 12px;
+    padding: 8px 10px;
 }
 footer p{
     float: left;
     display: flex;
-    font-size: 5em;
+    font-size: 2em;
     color: #111;
     text-align: center;
-    padding: 10px 12px;
+    padding: 8px 10px;
 }

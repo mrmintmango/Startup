@@ -1,36 +1,49 @@
+ main{
+  background-color: grey;
+ }
  .titleWords{
+  font-size: 4vw;
   font-family: sans-serif;
   color: black;
-  padding: 3vw;
+  padding: 2vw;
   text-align: center;
   align-content: center;
   background-color: aquamarine;
 }
-body{
-  background-color: grey;
-}
-p{
+.frontText{
   font-family: sans-serif;
+  color: black;
+  padding: 2vw;
+  font-size: 3vw;
 }
 .login{
-  background-color: aliceblue;
-  padding: 2px;
-  font-size: 30px;
-}
-li{
   font-family: sans-serif;
-  align-items: center;
+  background-color: aliceblue;
+  color: black;
+  padding: 1vw;
+  font-size: 4vw;
+}
+.center{
   text-align: center;
 }
-button{
-  height: 30px;
+.buttons{
+  height: 5vw;
+  width: 18vw;
   margin: 10px;
   align-content: center;
   text-align: center;
   color: white;
   background-color: rgb(9, 77, 60);
 }
+.inputBox{
+  font-size: 2vw;
+  height: 3vw;
+  width: 25vw;
+  margin: 10px;
+}
 .wrapper{
+  display: flex;
+  flex-direction: column;
   text-align: center;
   background-color: aliceblue;
   padding:5px;
