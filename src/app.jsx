@@ -1,5 +1,5 @@
 import React from 'react';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
@@ -19,8 +19,6 @@ export default function App() {
                 <li><NavLink to='time'>GameTime</NavLink></li>
                 <li><NavLink to='friends'>Friends</NavLink></li>
             </ul>       
-
-            <main>App componenets go here</main>
 
             <Routes>
             <Route path='/' element={<Login />} exact />

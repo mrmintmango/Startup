@@ -16,6 +16,9 @@ p{
     text-align: center;
     text-decoration: none;
 }
+main{
+    height: 45vw;
+}
 body{
     background-color: silver;
 }
