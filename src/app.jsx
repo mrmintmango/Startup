@@ -6,7 +6,6 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Info } from './Info/info';
 import { Friends } from './friends/friends';
-import { Time } from './time/time';
 import { Vault } from './vault/vault';
 
 export default function App() {
@@ -16,14 +15,12 @@ export default function App() {
             <ul className="navigation">
                 <li><NavLink to=''>Login</NavLink></li>
                 <li><NavLink to='vault'>Vault</NavLink></li>
-                <li><NavLink to='time'>GameTime</NavLink></li>
                 <li><NavLink to='friends'>Friends</NavLink></li>
-            </ul>       
+            </ul>
 
             <Routes>
             <Route path='/' element={<Login />} exact />
             <Route path='/vault' element={<Vault />} />
-            <Route path='/time' element={<Time />} />
             <Route path='/info' element={<Info />} />
             <Route path='/friends' element={<Friends />} />
             <Route path='*' element={<NotFound />} />

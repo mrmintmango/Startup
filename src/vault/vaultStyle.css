@@ -1,7 +1,7 @@
 
-h2{
+.scrollTitle{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 5vw;
+    font-size: 2vw;
     margin: 5px;
     display: flex;
     align-items: center;

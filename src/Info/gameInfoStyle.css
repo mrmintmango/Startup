@@ -3,7 +3,7 @@ a{
     font-size: 6vw;
     background-color: aquamarine;
 }
-h2{
+.gameInfoTitle{
     font-family: 'Courier New', Courier, monospace;
     font-size: 10vw;
     text-align: center;
