@@ -95,9 +95,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [x] **Bundled using Vite** - I was able to bundle my code using vite and debug and load up pages with it succesfully. 
+- [x] **Components** - I created componenets of my different pages to be displayed on button press. Because of time restraints I sadly had to cut back on the scope of my application, therefore there will no longer be a game time function. It was just going to be a glorified timer anyways. 
+- [x] **Router** - I implemented routing between login and voting components.
 
 ## 🚀 React part 2: Reactivity
 
