@@ -3,7 +3,7 @@ import './friendsStyle.css'
 
 export function Friends() {
   return (
-    <main className="container-fluid bg-secondary text-center">
+    <main className="friendmain">
       <div>
         <h3>Check out your friends vaults!</h3>
             <div className='scrollmenu'>

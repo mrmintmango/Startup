@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export function Login() {
   return (
-    <main>
+    <main className='mainLogin'>
       <h2 className='titleWords'>the Game Vault</h2>
       <div className="wrapper">
         <p className="login"> Login </p>

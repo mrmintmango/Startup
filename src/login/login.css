@@ -1,4 +1,4 @@
- main{
+ .mainLogin{
   background-color: grey;
  }
  .titleWords{
@@ -13,20 +13,21 @@
 .frontText{
   font-family: sans-serif;
   color: black;
-  padding: 2vw;
+  padding: 1vw;
   font-size: 3vw;
 }
 .login{
   font-family: sans-serif;
   background-color: aliceblue;
   color: black;
-  padding: 1vw;
+  padding: 0vw;
   font-size: 4vw;
 }
 .center{
   text-align: center;
 }
 .buttons{
+  font-size: 2em;
   height: 5vw;
   width: 18vw;
   margin: 10px;

@@ -1,19 +1,7 @@
-a{
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 6vw;
-    background-color: aquamarine;
-}
 .gameInfoTitle{
     font-family: 'Courier New', Courier, monospace;
     font-size: 10vw;
     text-align: center;
-}
-body{
-    background-color: silver;
-}
-textarea{
-    height: 30vw;
-    width: 30vw;
 }
 .grid-container{
     font-size: 5vw;
