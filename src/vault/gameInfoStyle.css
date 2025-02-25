@@ -27,6 +27,9 @@
     border: 5px solid aquamarine;
     grid-row: 1;
     grid-column: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 .item4{
     font-family: 'Courier New', Courier, monospace;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './gameInfoStyle.css';
 import { StarRating } from './StarRating';
 import { Vault } from './vault';
@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom';
 
 export function Info() {
   const navigate = useNavigate();
-
   const handleInfoClick = () => {
     navigate('/vault');
   };
+
+  const [rating, setRating] = useState(0);
   return (
     <main>
       <button onClick={handleInfoClick}>Back to Vault</button><p className="gameInfoTitle">Game Title</p>
@@ -18,6 +19,7 @@ export function Info() {
         <div className="item2"><img height={500} alt="gta" src="https://media.gamestop.com/i/gamestop/10161249?$pdp2x$"/></div>
         <div className="item3">
           <p>Rating:</p>
+          <StarRating rating={rating} onRatingChange={setRating} />
         </div>
       <div className="item4">
         <label for="textarea">Review: <br/></label>

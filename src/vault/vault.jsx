@@ -15,8 +15,7 @@ export function Vault() {
         <h3 className="titleWords"> Your Vault</h3>
         <h2 className='scrollTitle'> Video Games </h2>
         <div className="scrollmenu">
-          <button onClick={handleInfoClick}>Info</button>
-          <button><img alt="mario kart" src="https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"/><br/>Mario Kart</button>
+          <button onClick={handleInfoClick}><img alt="mario kart" src="https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"/><br/>Mario Kart</button>
           <button><img alt="mario kart" src="https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"/><br/>Mario Kart</button>
           <button><img alt="mario kart" src="https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"/><br/>Mario Kart</button>
           <button><img alt="mario kart" src="https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"/><br/>Mario Kart</button>
