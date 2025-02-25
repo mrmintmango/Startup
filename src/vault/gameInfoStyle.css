@@ -12,6 +12,10 @@
 }
 .item1{
     font-size: 3vw;
+    display: flex;
+    flex: row;
+    justify-content: center;
+    padding-top: 3vw;
     border: 5px solid aquamarine;
     grid-column-start: 1;
     grid-column-end: 2;
@@ -82,3 +86,41 @@
     height: 300px; /* Set a fixed height for the textarea */
     box-sizing: border-box; /* Include padding in the element's total height */
   }
+
+.heart-checkbox {
+  display: none;
+}
+
+.heart-label {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.heart-label::before,
+.heart-label::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 12px;
+  height: 20px;
+  border-radius: 12px 12px 0 0;
+  background: #ccc;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+  transition: background 0.3s;
+}
+
+.heart-label::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+.heart-checkbox:checked + .heart-label::before,
+.heart-checkbox:checked + .heart-label::after {
+  background: red;
+}
