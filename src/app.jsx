@@ -4,7 +4,7 @@ import './app.css';
 
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
-import { Info } from './vault/Info/info';
+import { Info } from './vault/info';
 import { Friends } from './friends/friends';
 import { Vault } from './vault/vault';
 
@@ -16,7 +16,7 @@ export default function App() {
                 <li><NavLink to=''>Login</NavLink></li>
                 <li><NavLink to='vault'>Vault</NavLink></li>
                 <li><NavLink to='friends'>Friends</NavLink></li>
-                <li><NavLink to='info'>Info</NavLink></li>
+                {/* <li><NavLink to='info'>Info</NavLink></li> */}
             </ul>
 
             <Routes>
