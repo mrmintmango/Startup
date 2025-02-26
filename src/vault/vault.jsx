@@ -60,21 +60,21 @@ export function Vault() {
 
   const handleAddVideoGame = () => {
     if (newVideoGame.trim() !== '') {
-      setVideoGames([...videoGames, { name: newVideoGame, imgSrc: 'https://via.placeholder.com/150' }]);
+      setVideoGames([...videoGames, { name: newVideoGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' }]);
       setNewVideoGame('');
     }
   };
 
   const handleAddBoardGame = () => {
     if (newBoardGame.trim() !== '') {
-      setBoardGames([...boardGames, { name: newBoardGame, imgSrc: 'https://via.placeholder.com/150' }]);
+      setBoardGames([...boardGames, { name: newBoardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' }]);
       setNewBoardGame('');
     }
   };
 
   const handleAddCardGame = () => {
     if (newCardGame.trim() !== '') {
-      setCardGames([...cardGames, { name: newCardGame, imgSrc: 'https://via.placeholder.com/150' }]);
+      setCardGames([...cardGames, { name: newCardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' }]);
       setNewCardGame('');
     }
   };

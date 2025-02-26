@@ -16,7 +16,7 @@ export function Info() {
     favorite: false,
     rating: 0,
     review: '',
-    memoriesImg: '',
+    memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
     memoriesText: ''   
   });
 
