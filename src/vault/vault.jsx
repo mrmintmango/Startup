@@ -35,20 +35,44 @@ export function Vault() {
     { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
   ]);
   
-  const [newGame, setNewGame] = useState('');
+  const [newVideoGame, setNewVideoGame] = useState('');
+  const [newBoardGame, setNewBoardGame] = useState('');
+  const [newCardGame, setNewCardGame] = useState('');
 
   const handleInfoClick = () => {
     navigate('/info');
   };
 
-  const handleNewGameChange = (event) => {
-    setNewGame(event.target.value);
+  const handleNewVideoGameChange = (event) => {
+    setNewVideoGame(event.target.value);
   };
 
-  const handleAddGame = () => {
-    if (newGame.trim() !== '') {
-      setGames([...games, { name: newGame, imgSrc: 'https://via.placeholder.com/150' }]);
-      setNewGame('');
+  const handleNewBoardGameChange = (event) => {
+    setNewBoardGame(event.target.value);
+  };
+
+  const handleNewCardGameChange = (event) => {
+    setNewCardGame(event.target.value);
+  };
+
+  const handleAddVideoGame = () => {
+    if (newVideoGame.trim() !== '') {
+      setVideoGames([...videoGames, { name: newVideoGame, imgSrc: 'https://via.placeholder.com/150' }]);
+      setNewVideoGame('');
+    }
+  };
+
+  const handleAddBoardGame = () => {
+    if (newBoardGame.trim() !== '') {
+      setBoardGames([...boardGames, { name: newBoardGame, imgSrc: 'https://via.placeholder.com/150' }]);
+      setNewBoardGame('');
+    }
+  };
+
+  const handleAddCardGame = () => {
+    if (newCardGame.trim() !== '') {
+      setCardGames([...cardGames, { name: newCardGame, imgSrc: 'https://via.placeholder.com/150' }]);
+      setNewCardGame('');
     }
   };
 
@@ -64,13 +88,14 @@ export function Vault() {
             </button>
           ))}
         </div>
-        <label htmlFor="search"> Add new game: </label>
-        <input type="search" id="search" name="varSearch" value={newGame} onChange={handleNewGameChange} />
-        <button onClick={handleAddGame}>Submit</button>
+        <label htmlFor="videoGameSearch"> Add new game: </label>
+        <input type="search" id="videoGameSearch" name="varSearch1" value={newVideoGame} onChange={handleNewVideoGameChange} />
+        <button onClick={handleAddVideoGame}>Submit</button>
         <div>
           <br />
           <br />
         </div>
+
         <h2 className='scrollTitle'> Board Games </h2>
         <div className="scrollmenu">
           {boardGames.map((game, index) => (
@@ -79,13 +104,14 @@ export function Vault() {
             </button>
           ))}
         </div>
-        <label htmlFor="search"> Add new game: </label>
-        <input type="search" id="search" name="varSearch" value={newGame} onChange={handleNewGameChange} />
-        <button onClick={handleAddGame}>Submit</button>
+        <label htmlFor="boardGameSearch"> Add new game: </label>
+        <input type="search" id="boardGameSearch" name="varSearch2" value={newBoardGame} onChange={handleNewBoardGameChange} />
+        <button onClick={handleAddBoardGame}>Submit</button>
         <div>
           <br />
           <br />
         </div>
+
         <h2 className='scrollTitle'> Card Games </h2>
         <div className="scrollmenu">
           {cardGames.map((game, index) => (
@@ -94,9 +120,9 @@ export function Vault() {
             </button>
           ))}
         </div>
-        <label htmlFor="search"> Add new game: </label>
-        <input type="search" id="search" name="varSearch" value={newGame} onChange={handleNewGameChange} />
-        <button onClick={handleAddGame}>Submit</button>
+        <label htmlFor="cardGameSearch"> Add new game: </label>
+        <input type="search" id="cardGameSearch" name="varSearch3" value={newCardGame} onChange={handleNewCardGameChange} />
+        <button onClick={handleAddCardGame}>Submit</button>
       </div>
       <div>
         <br />
