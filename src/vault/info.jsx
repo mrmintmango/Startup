@@ -12,7 +12,7 @@ export function Info() {
 
   const [gameDetails, setGameDetails] = useState({
     name: '',
-    imgSrc: '',
+    imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
     favorite: false,
     rating: 0,
     review: '',
@@ -28,7 +28,20 @@ export function Info() {
       if (gameDetails) {
         setGameDetails(gameDetails);
       }
+      else {
+        setGameDetails({
+          name: gameName,
+          imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+          favorite: false,
+          rating: 0,
+          review: '',
+          memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+          memoriesText: ''
+        });
     }
+  }
+    
+
   }, [location.search]);
 
   const handleFavoriteChange = () => {
@@ -46,17 +59,6 @@ export function Info() {
   const handleMemoryTextChange = (event) => {
     setGameDetails({ ...gameDetails, memoriesText: event.target.value });
   };
-
-  // const handleMemoryImgChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       setGameDetails({ ...gameDetails, memoriesImg: e.target.result });
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
