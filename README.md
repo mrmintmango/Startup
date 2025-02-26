@@ -103,8 +103,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I implemented all the info for the info page to be stored on local storage for now and be connected to the title of the game button used to get to that page. I also added a proper login and register functionality which also stores info on the local storage. I added functionality that happens on startup and when you interact with things. I'll add a logout function later. 
+- [x] **Hooks** - I added useEffect and UseState object in my aplication. Mostly useEffect because a lot of it depends on the server, but for things like a favorite button and rating things with stars, I used UseState. 
 
 ## 🚀 Service deliverable
 
