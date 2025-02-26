@@ -24,21 +24,10 @@ export function Info() {
     const params = new URLSearchParams(location.search);
     const gameName = params.get('name');
     if (gameName) {
-      const storedGameDetails = JSON.parse(localStorage.getItem(gameName));
-      if (storedGameDetails) {
-        setGameDetails(storedGameDetails);
+      const gameDetails = JSON.parse(localStorage.getItem(gameName));
+      if (gameDetails) {
+        setGameDetails(gameDetails);
       }
-    }
-    else {
-      setGameDetails({
-        name: gameName,
-        imgSrc: '',
-        favorite: false,
-        rating: 0,
-        review: '',
-        memoriesImg: '',
-        memoriesText: ''
-      });
     }
   }, [location.search]);
 
@@ -93,7 +82,7 @@ export function Info() {
       <div className="grid-container">
         <div className="item1">
           <p> Favorite? 
-            <input type="checkbox" className="heart-checkbox" checked={gameDetails.favorite} onChange={handleFavoriteChange}/>
+            <input type="checkbox" id="favorite" className="heart-checkbox" checked={gameDetails.favorite} onChange={handleFavoriteChange}/>
             <label htmlFor="favorite" className="heart-label"></label>
           </p>
         </div>
