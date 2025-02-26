@@ -9,18 +9,21 @@ import { Friends } from './friends/friends';
 import { Vault } from './vault/vault';
 
 export default function App() {
+  const [user, setUser] = React.useState(localStorage.getItem('user') || null);
+  //const [password, setPass] = React.useState(localStorage.getItem('password') || null);
+
     return (
       <BrowserRouter>
         <div className="body bg-dark text-light">
             <ul className="navigation">
                 <li><NavLink to=''>Login</NavLink></li>
-                <li><NavLink to='vault'>Vault</NavLink></li>
-                <li><NavLink to='friends'>Friends</NavLink></li>
-                {/* <li><NavLink to='info'>Info</NavLink></li> */}
+                {user && <li><NavLink to='vault'>Vault</NavLink></li>}
+                {user && <li><NavLink to='friends'>Friends</NavLink></li>}
+                <p className="userName">{user}</p>
             </ul>
 
             <Routes>
-            <Route path='/' element={<Login />} exact />
+            <Route path='/' element={<Login setUser={setUser}/>} exact />
             <Route path='/vault' element={<Vault />} />
             <Route path='/info' element={<Info />} />
             <Route path='/friends' element={<Friends />} />

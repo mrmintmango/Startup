@@ -2,25 +2,26 @@ import React from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
 
-export function Login() {
-  const [user, setUser] = React.useState('');
-  const [password, setPass] = React.useState('');
+export function Login({setUser}) {
+  const [userText, setUserText] = React.useState('');
+  const [passText, setPassText] = React.useState('');
   const navigate = useNavigate();
 
-  function userText(text) {
-    setUser(text.target.value);
+  function userTextChange(event) {
+    setUserText(event.target.value);
   }
-  function passText(text) {
-    setPass(text.target.value);
+  function passTextChange(event) {
+    setPassText(event.target.value);
   }
 
   function registerUser() {
-    localStorage.setItem('user', user);
-    localStorage.setItem('password', password);
+    localStorage.setItem('user', userText);
+    localStorage.setItem('password', passText);
+    setUser(userText)
   }
 
   function loginUser() {
-    if (localStorage.getItem('user') === user && localStorage.getItem('password') === password) {
+    if (localStorage.getItem('user') === userText && localStorage.getItem('password') === passText) {
       navigate('/vault');
     } else {
       alert('Invalid username or password');
@@ -34,11 +35,11 @@ export function Login() {
         <p className="login"> Login </p>
         <li>
           <label className='frontText' htmlFor="text">Username: </label>
-          <input className='inputBox' type="text" placeholder="your name here" onChange={userText}/>
+          <input className='inputBox' type="text" placeholder="your name here" onChange={userTextChange}/>
         </li>
         <li>
           <label className='frontText' htmlFor="password">Password: </label>
-          <input className='inputBox' type="password" placeholder="your password here" onChange={passText}/>
+          <input className='inputBox' type="password" placeholder="your password here" onChange={passTextChange}/>
         </li>
         <div className='center'> 
           <button className='buttons' type="button" onClick={registerUser}>Register</button>
