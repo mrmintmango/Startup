@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './vaultStyle.css';
 
 export function Vault() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [videoGames, setVideoGames] = useState([
     { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
     { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
@@ -38,9 +39,18 @@ export function Vault() {
   const [newVideoGame, setNewVideoGame] = useState('');
   const [newBoardGame, setNewBoardGame] = useState('');
   const [newCardGame, setNewCardGame] = useState('');
+  const [friendName, setFriendName] = useState(localStorage.getItem('user'));
 
-  const handleInfoClick = () => {
-    navigate('/info');
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const friend = params.get('friend');
+    if (friend) {
+      setFriendName(friend);
+    }
+  }, [location.search]);
+
+  const handleInfoClick = (game) => {
+    navigate(`/info?name=${game.name}`);
   };
 
   const handleNewVideoGameChange = (event) => {
@@ -79,11 +89,11 @@ export function Vault() {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
-        <h3 className="titleWords"> Your Vault</h3>
+        <h3 className="titleWords"> {friendName}'s Vault</h3>
         <h2 className='scrollTitle'> Video Games </h2>
         <div className="scrollmenu">
           {videoGames.map((game, index) => (
-            <button key={index} onClick={handleInfoClick}>
+            <button key={index} onClick={() => handleInfoClick(game)}>
               <img alt={game.name} src={game.imgSrc} /><br />{game.name}
             </button>
           ))}
@@ -99,7 +109,7 @@ export function Vault() {
         <h2 className='scrollTitle'> Board Games </h2>
         <div className="scrollmenu">
           {boardGames.map((game, index) => (
-            <button key={index} onClick={handleInfoClick}>
+            <button key={index} onClick={() => handleInfoClick(game)}>
               <img alt={game.name} src={game.imgSrc} /><br />{game.name}
             </button>
           ))}
@@ -115,7 +125,7 @@ export function Vault() {
         <h2 className='scrollTitle'> Card Games </h2>
         <div className="scrollmenu">
           {cardGames.map((game, index) => (
-            <button key={index} onClick={handleInfoClick}>
+            <button key={index} onClick={() => handleInfoClick(game)}>
               <img alt={game.name} src={game.imgSrc} /><br />{game.name}
             </button>
           ))}

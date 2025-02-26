@@ -5,8 +5,40 @@ import { useNavigate } from 'react-router-dom';
 
 export function Info() {
   const navigate = useNavigate();
-  const handleInfoClick = () => {
+//  const location = useLocation();
+  const handleSave = () => {
+    localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
     navigate('/vault');
+  };
+
+  const [gameDetails, setGameDetails] = useState({
+    name: '',
+    imgSrc: '',
+    favorite: false,
+    rating: 0,
+    review: '',
+    memories: []
+  });
+
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   const gameName = params.get('name');
+  //   const storedGameDetails = JSON.parse(localStorage.getItem(gameName));
+  //   if (storedGameDetails) {
+  //     setGameDetails(storedGameDetails);
+  //   }
+  // }, [location.search]);
+
+  const handleFavoriteChange = () => {
+    setGameDetails({ ...gameDetails, favorite: !gameDetails.favorite });
+  };
+
+  const handleRatingChange = (rating) => {
+    setGameDetails({ ...gameDetails, rating });
+  };
+
+  const handleReviewChange = (event) => {
+    setGameDetails({ ...gameDetails, review: event.target.value });
   };
 
   const [rating, setRating] = useState(0);
@@ -25,25 +57,25 @@ export function Info() {
 
   return (
     <main>
-      <button onClick={handleInfoClick}>Back to Vault</button>
+      <button onClick={handleSave}>Back to Vault</button>
       <p className="gameInfoTitle">Game Title</p>
       <div className="grid-container">
         <div className="item1">
           <p> Favorite? 
-            <input type="checkbox" id="favorite" className="heart-checkbox" />
+            <input type="checkbox" id="favorite" className="heart-checkbox" checked={gameDetails.favorite} onChange={handleFavoriteChange}/>
             <label htmlFor="favorite" className="heart-label"></label>
           </p>
         </div>
         <div className="item2">
-          <img height={500} alt="gta" src="https://media.gamestop.com/i/gamestop/10161249?$pdp2x$"/>
+          <img height={500} alt={gameDetails.name} src={gameDetails.imgSrc}/>
         </div>
         <div className="item3">
           <p>Rating:</p>
-          <StarRating rating={rating} onRatingChange={setRating} />
+          <StarRating rating={gameDetails.rating} onRatingChange={handleRatingChange} />
         </div>
         <div className="item4">
           <label htmlFor="textarea">Review: <br/></label>
-          <textarea id="textarea" name="varTextarea"></textarea>
+          <textarea id="textarea" value={gameDetails.review} onChange={handleReviewChange}></textarea>
         </div>
         <div className="item6">
           <p> Memories: </p>
@@ -51,8 +83,9 @@ export function Info() {
             <input type="file" id="file" name="varFile" accept="image/*" multiple onChange={handleFileChange} />
           </div>
           <div className="memories-container">
-            <img height={300} alt="gta" src={selectedImage} />
-            <textarea id="textarea" name="varTextarea"></textarea>
+            {gameDetails.memories.map((memory, index) => (
+              <img key={index} height={300} alt="memory" src={memory} />
+            ))}
           </div>
         </div>
       </div>
