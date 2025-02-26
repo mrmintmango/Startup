@@ -43,14 +43,30 @@ export function Info() {
     setGameDetails({ ...gameDetails, review: event.target.value });
   };
 
-  const handleMemoryChange = (event) => {
+  const handleMemoryTextChange = (event) => {
     setGameDetails({ ...gameDetails, memoriesText: event.target.value });
   };
 
+  // const handleMemoryImgChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setGameDetails({ ...gameDetails, memoriesImg: e.target.result });
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
   const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);
-    const memories = files.map(file => URL.createObjectURL(file));
-    setGameDetails({ ...gameDetails, memories });
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setGameDetails({ ...gameDetails, memoriesImg: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleBack = () => {
@@ -103,8 +119,10 @@ export function Info() {
             <input type="file" id="file" name="varFile" accept="image/*" multiple onChange={handleFileChange} />
           </div>
           <div className="memories-container">
-            <img height={300} alt="memory pic" src={gameDetails.memoriesImg} />
-            <textarea id="textarea" value={gameDetails.memoriesText} onChange={handleMemoryChange}></textarea>
+            {gameDetails.memoriesImg && (
+              <img height={300} alt="memory pic" src={gameDetails.memoriesImg} />
+            )}
+            <textarea id="textarea" value={gameDetails.memoriesText} onChange={handleMemoryTextChange}></textarea>
           </div>
         </div>
       </div>
