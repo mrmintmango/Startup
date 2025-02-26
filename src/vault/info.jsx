@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Info() {
   const navigate = useNavigate();
+  const location = useLocation();
   // const handleInfoClick = () => {
   //   navigate('/vault');
   // };
@@ -27,6 +28,17 @@ export function Info() {
       if (storedGameDetails) {
         setGameDetails(storedGameDetails);
       }
+    }
+    else {
+      setGameDetails({
+        name: gameName,
+        imgSrc: '',
+        favorite: false,
+        rating: 0,
+        review: '',
+        memoriesImg: '',
+        memoriesText: ''
+      });
     }
   }, [location.search]);
 
@@ -53,7 +65,6 @@ export function Info() {
   };
 
   const handleBack = () => {
-    localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
     navigate('/vault');
   };
 
@@ -78,7 +89,7 @@ export function Info() {
   return (
     <main>
       <button onClick={handleBack}>Back to Vault</button> <button className='saveButton' onClick={handleSave}>Save</button>
-      <p className="gameInfoTitle">Game Title</p>
+      <p className="gameInfoTitle">Game Title = {gameDetails.name}</p>
       <div className="grid-container">
         <div className="item1">
           <p> Favorite? 
