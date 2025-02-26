@@ -50,7 +50,7 @@ export function Vault() {
   }, [location.search]);
 
   const handleInfoClick = (game) => {
-    navigate(`/info?name=${game.name}`);
+    navigate(`/info?name=${game}`);
   };
 
   const handleNewVideoGameChange = (event) => {
