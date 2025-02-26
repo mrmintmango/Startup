@@ -10,6 +10,18 @@ export function Info() {
   };
 
   const [rating, setRating] = useState(0);
+  const [selectedImage, setSelectedImage] = useState('https://media.gamestop.com/i/gamestop/10106497_10106499_10115457_10115461_10115462_10161249_10161250_SCR17/Grand-Theft-Auto-V---PlayStation-4?$screen2x$');
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <main>
@@ -36,10 +48,10 @@ export function Info() {
         <div className="item6">
           <p> Memories: </p>
           <div>
-            <input type="file" id="file" name="varFile" accept="image/*" multiple />
+            <input type="file" id="file" name="varFile" accept="image/*" multiple onChange={handleFileChange} />
           </div>
           <div className="memories-container">
-            <img height={300} alt="gta" src="https://media.gamestop.com/i/gamestop/10106497_10106499_10115457_10115461_10115462_10161249_10161250_SCR17/Grand-Theft-Auto-V---PlayStation-4?$screen2x$"/>
+            <img height={300} alt="gta" src={selectedImage} />
             <textarea id="textarea" name="varTextarea"></textarea>
           </div>
         </div>
