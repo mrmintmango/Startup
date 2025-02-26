@@ -19,6 +19,17 @@ export function Info() {
     memoriesText: ''   
   });
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const gameName = params.get('name');
+    if (gameName) {
+      const storedGameDetails = JSON.parse(localStorage.getItem(gameName));
+      if (storedGameDetails) {
+        setGameDetails(storedGameDetails);
+      }
+    }
+  }, [location.search]);
+
   const handleFavoriteChange = () => {
     setGameDetails({ ...gameDetails, favorite: !gameDetails.favorite });
   };
@@ -66,7 +77,7 @@ export function Info() {
 
   return (
     <main>
-      <button onClick={handleSave}>Back to Vault</button> <button className='saveButton' onClick={handleSave}>Save</button>
+      <button onClick={handleBack}>Back to Vault</button> <button className='saveButton' onClick={handleSave}>Save</button>
       <p className="gameInfoTitle">Game Title</p>
       <div className="grid-container">
         <div className="item1">

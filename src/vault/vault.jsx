@@ -5,37 +5,9 @@ import './vaultStyle.css';
 export function Vault() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [videoGames, setVideoGames] = useState([
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-  ]);
-  const [boardGames, setBoardGames] = useState([
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-  ]);
-  const [cardGames, setCardGames] = useState([
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' }, 
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-    { name: 'Mario Kart', imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' },
-  ]);
-  
+  const [videoGames, setVideoGames] = useState([]);
+  const [boardGames, setBoardGames] = useState([]);
+  const [cardGames, setCardGames] = useState([]);
   const [newVideoGame, setNewVideoGame] = useState('');
   const [newBoardGame, setNewBoardGame] = useState('');
   const [newCardGame, setNewCardGame] = useState('');
@@ -49,8 +21,29 @@ export function Vault() {
     }
   }, [location.search]);
 
+  useEffect(() => {
+    const storedVideoGames = JSON.parse(localStorage.getItem('videoGames'));
+    const storedBoardGames = JSON.parse(localStorage.getItem('boardGames'));
+    const storedCardGames = JSON.parse(localStorage.getItem('cardGames'));
+    if (storedVideoGames) setVideoGames(storedVideoGames);
+    if (storedBoardGames) setBoardGames(storedBoardGames);
+    if (storedCardGames) setCardGames(storedCardGames);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('videoGames', JSON.stringify(videoGames));
+  }, [videoGames]);
+
+  useEffect(() => {
+    localStorage.setItem('boardGames', JSON.stringify(boardGames));
+  }, [boardGames]);
+
+  useEffect(() => {
+    localStorage.setItem('cardGames', JSON.stringify(cardGames));
+  }, [cardGames]);
+
   const handleInfoClick = (game) => {
-    navigate(`/info?name=${game}`);
+    navigate(`/info?name=${game.name}`);
   };
 
   const handleNewVideoGameChange = (event) => {
