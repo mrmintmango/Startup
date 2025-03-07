@@ -66,6 +66,14 @@ const verifyAuth = async (req, res, next) => {
 };
 
 //GetVault gets the vault for the current user
+apiRouter.get('/vault', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    res.send(vaults[user.email]); //might need to update this line
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
 
 //GetPic gets a pic from the third party api for the button images
 
