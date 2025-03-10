@@ -14,10 +14,9 @@ let apiRouter = express.Router();
 app.use('/api', apiRouter);
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
-
-// app.listen(port, () => {
-//   console.log(`Backend is listening on port ${port}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
@@ -29,6 +28,20 @@ apiRouter.post('/auth/create', async (req, res) => {
     setAuthCookie(res, user.token);
     res.send({ email: user.email });
   }
+});
+
+router.post('/register', (req, res) => {
+  const { email, password } = req.body;
+  const users = readUsers();
+
+  if (users.find(user => user.email === email)) {
+    return res.status(400).json({ msg: 'User already exists' });
+  }
+
+  users.push({ email, password });
+  writeUsers(users);
+
+  res.status(200).json({ msg: 'User registered successfully' });
 });
 
 // GetAuth login an existing user
