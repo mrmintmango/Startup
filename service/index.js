@@ -31,14 +31,14 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   const users = readUsers();
 
-  if (users.find(user => user.email === email)) {
+  if (users.find(user => user.username === username)) {
     return res.status(400).json({ msg: 'User already exists' });
   }
 
-  users.push({ email, password });
+  users.push({ username, password });
   writeUsers(users);
 
   res.status(200).json({ msg: 'User registered successfully' });

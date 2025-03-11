@@ -15,19 +15,11 @@ export function Login({ setUser }) {
     setPassText(event.target.value);
   }
 
-  function loginUser() {
-    if (localStorage.getItem('user') === userText && localStorage.getItem('password') === passText) {
-      navigate('/vault');
-    } else {
-      alert('Invalid username or password');
-    }
-  }
-
-  async function registerUser() {
-    const endpoint = '/api/auth/register';
+  async function loginUser() {
+    const endpoint = '/api/auth/login';
     const response = await fetch(endpoint, {
       method: 'POST',
-      body: JSON.stringify({ email: userText, password: passText }),
+      body: JSON.stringify({ username: userText, password: passText }),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -37,6 +29,45 @@ export function Login({ setUser }) {
       localStorage.setItem('password', passText);
       setUser(userText);
       navigate('/vault');
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
+    }
+  }
+
+  async function registerUser() {
+    const endpoint = '/api/auth/register';
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({ username: userText, password: passText }),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.setItem('user', userText);
+      localStorage.setItem('password', passText);
+      setUser(userText);
+      navigate('/vault');
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
+    }
+  }
+
+  async function logoutUser() {
+    const endpoint = '/api/auth/logout';
+    const response = await fetch(endpoint, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.removeItem('user');
+      localStorage.removeItem('password');
+      setUser(null);
+      navigate('/');
     } else {
       const body = await response.json();
       setDisplayError(`⚠ Error: ${body.msg}`);
@@ -59,6 +90,7 @@ export function Login({ setUser }) {
         <div className='center'>
           <button className='buttons' type="button" onClick={registerUser}>Register</button>
           <button className='buttons' type="button" onClick={loginUser}>Login</button>
+          <button className='buttons' type="button" onClick={logoutUser}>Logout</button>
         </div>
         {displayError && <p className="error">{displayError}</p>}
       </div>
