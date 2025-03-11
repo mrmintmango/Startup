@@ -1,32 +1,34 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const express = require('express');
+const fs = require('fs');
 const path = require('path');
 
-const express = require('express');
 const app = express();
 
 app.use(express.json());
-
 app.use(cookieParser());
-
 app.use(express.static('public'));
 
 const usersFilePath = path.join(__dirname, 'users.json');
 
-// Helper function to write users to the storage
+// Helper function to write users to the file
 const writeUsers = (users) => {
-  localStorage.setItem('users', JSON.stringify(users));
+  fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
 };
 
+// Helper function to read users from the file
 const readUsers = () => {
-  if (!localStorage.getItem('users')) {
-    localStorage.setItem('users', JSON.stringify([]));
+  if (!fs.existsSync(usersFilePath)) {
+    return [];
   }
-  return JSON.parse(localStorage.getItem('users'));
+  const usersData = fs.readFileSync(usersFilePath);
+  return JSON.parse(usersData);
 };
-users = readUsers();
 
+// Initialize users from the file
+let users = readUsers();
 let vaults = [];
 
 let apiRouter = express.Router();
@@ -49,7 +51,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
-apiRouter.post('/api/auth/register', (req, res) => {
+apiRouter.post('/auth/register', (req, res) => {
   const { username, password } = req.body;
 
   if (users.find(user => user.username === username)) {
@@ -69,8 +71,6 @@ apiRouter.post('/auth/login', async (req, res) => {
       user.token = uuid.v4();
       setAuthCookie(res, user.token);
       res.send({ email: user.email });
-      localStorage.setItem('user', userText);
-      localStorage.setItem('password', passText);
       return;
     }
   }
@@ -97,7 +97,7 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
-//GetVault gets the vault for the current user
+// GetVault gets the vault for the current user
 apiRouter.get('/vault', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
@@ -107,9 +107,9 @@ apiRouter.get('/vault', verifyAuth, async (req, res) => {
   }
 });
 
-//GetPic gets a pic from the third party api for the button images
+// GetPic gets a pic from the third party api for the button images
 
-//PutVault updates the vault for the current user
+// PutVault updates the vault for the current user
 
 // Default error handler
 app.use(function (err, req, res, next) {
@@ -130,6 +130,7 @@ async function createUser(email, password) {
     token: uuid.v4(),
   };
   users.push(user);
+  writeUsers(users);
 
   return user;
 }
