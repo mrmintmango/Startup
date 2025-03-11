@@ -13,6 +13,8 @@ app.use(express.static('public'));
 
 const usersFilePath = path.join(__dirname, 'users.json');
 
+const authCookieName = 'token';
+
 // Helper function to write users to the file
 const writeUsers = (users) => {
   fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
@@ -138,6 +140,7 @@ async function createUser(username, password) {
 async function findUser(field, value) {
   if (!value) return null;
 
+  console.log(users);
   return users.find((u) => u[field] === value);
 }
 
