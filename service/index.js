@@ -41,13 +41,13 @@ app.listen(PORT, () => {
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  if (await findUser('email', req.body.email)) {
+  if (await findUser('username', req.body.username)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = await createUser(req.body.email, req.body.password);
+    const user = await createUser(req.body.username, req.body.password);
 
     setAuthCookie(res, user.token);
-    res.send({ email: user.email });
+    res.send({ username: user.username });
   }
 });
 
@@ -65,12 +65,12 @@ apiRouter.post('/auth/register', (req, res) => {
 
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = await findUser('email', req.body.email);
+  const user = await findUser('username', req.body.username);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       user.token = uuid.v4();
       setAuthCookie(res, user.token);
-      res.send({ email: user.email });
+      res.send({ username: user.username });
       return;
     }
   }
@@ -98,14 +98,14 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetVault gets the vault for the current user
-apiRouter.get('/vault', verifyAuth, async (req, res) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
-  if (user) {
-    res.send(vaults[user.email]); //might need to update this line
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
-});
+// apiRouter.get('/vault', verifyAuth, async (req, res) => {
+//   const user = await findUser('token', req.cookies[authCookieName]);
+//   if (user) {
+//     res.send(vaults[user.email]); //might need to update this line
+//   } else {
+//     res.status(401).send({ msg: 'Unauthorized' });
+//   }
+// });
 
 // GetPic gets a pic from the third party api for the button images
 
@@ -121,11 +121,11 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-async function createUser(email, password) {
+async function createUser(username, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = {
-    email: email,
+    username: username,
     password: passwordHash,
     token: uuid.v4(),
   };

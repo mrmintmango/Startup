@@ -2,5 +2,14 @@
   {
     "username": "Pikachu",
     "password": "Thunderbolt"
+  },
+  {
+    "password": "$2b$10$XGuRhELA5Bt531Bo09pWBucft3JWGspxtGotMkovKMc1nxSyhpx3.",
+    "token": "148e20ba-7619-4564-9b1a-e3eaee90ab27"
+  },
+  {
+    "username": "pikachu",
+    "password": "$2b$10$Ui9xp6Og/Js5W57ZWu7JKOKstQgcH0vN18SQU3PzuCWjbBn9aqxxq",
+    "token": "c54aca42-3d16-4d52-b4fd-623b68644115"
   }
 ]

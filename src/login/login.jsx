@@ -19,7 +19,7 @@ export function Login({ setUser }) {
     const endpoint = '/api/auth/login';
     const response = await fetch(endpoint, {
       method: 'POST',
-      body: JSON.stringify({ username: userText, password: passText }),
+      body: JSON.stringify({ username: userText }),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -36,7 +36,7 @@ export function Login({ setUser }) {
   }
 
   async function registerUser() {
-    const endpoint = '/api/auth/register';
+    const endpoint = '/api/auth/create';
     const response = await fetch(endpoint, {
       method: 'POST',
       body: JSON.stringify({ username: userText, password: passText }),
