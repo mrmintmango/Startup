@@ -7,15 +7,21 @@ const app = express();
 
 app.use(express.json());
 
+app.use(cookieParser());
+
+app.use(express.static('public'));
+
+
+
 let users = [];
 let vaults = [];
 
 let apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const PORT = process.argv.length > 2 ? process.argv[2] : 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`server is running on port ${PORT}`);
 });
 
 // CreateAuth a new user
@@ -30,7 +36,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
-router.post('/register', (req, res) => {
+apiRouter.post('/register', (req, res) => {
   const { username, password } = req.body;
   const users = readUsers();
 
