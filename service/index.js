@@ -1,6 +1,7 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const path = require('path');
 
 const express = require('express');
 const app = express();
@@ -11,9 +12,21 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
+const usersFilePath = path.join(__dirname, 'users.json');
 
+// Helper function to write users to the storage
+const writeUsers = (users) => {
+  localStorage.setItem('users', JSON.stringify(users));
+};
 
-let users = [];
+const readUsers = () => {
+  if (!localStorage.getItem('users')) {
+    localStorage.setItem('users', JSON.stringify([]));
+  }
+  return JSON.parse(localStorage.getItem('users'));
+};
+users = readUsers();
+
 let vaults = [];
 
 let apiRouter = express.Router();
@@ -36,14 +49,12 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
-apiRouter.post('/register', (req, res) => {
+apiRouter.post('/api/auth/register', (req, res) => {
   const { username, password } = req.body;
-  const users = readUsers();
 
   if (users.find(user => user.username === username)) {
     return res.status(400).json({ msg: 'User already exists' });
   }
-
   users.push({ username, password });
   writeUsers(users);
 
@@ -58,6 +69,8 @@ apiRouter.post('/auth/login', async (req, res) => {
       user.token = uuid.v4();
       setAuthCookie(res, user.token);
       res.send({ email: user.email });
+      localStorage.setItem('user', userText);
+      localStorage.setItem('password', passText);
       return;
     }
   }

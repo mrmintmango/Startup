@@ -45,8 +45,6 @@ export function Login({ setUser }) {
       },
     });
     if (response?.status === 200) {
-      localStorage.setItem('user', userText);
-      localStorage.setItem('password', passText);
       setUser(userText);
       navigate('/vault');
     } else {
