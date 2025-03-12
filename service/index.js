@@ -29,28 +29,8 @@ const readUsers = () => {
   return JSON.parse(usersData);
 };
 
-// // Helper function to write vaults to the file
-// const writeVault = (vaults) => {
-//   fs.writeFileSync(vaultsFilePath, JSON.stringify(vaults, null, 2));
-// };
-
-// // Helper function to read vaults from the file
-// const readVaults = () => {
-//   if (!fs.existsSync(vaultsFilePath)) {
-//     return [];
-//   }
-//   const vaultsData = fs.readFileSync(vaultsFilePath);
-//   return JSON.parse(vaultsData);
-// };
-
-// const updateVault = (email, vault) => {
-//   vaults[email] = vault;
-//   writeVault(vaults);
-// }
-
 // Initialize users from the file
 let users = readUsers();
-//let vaults = readVaults();
 
 let apiRouter = express.Router();
 app.use('/api', apiRouter);
@@ -78,7 +58,7 @@ apiRouter.post('/auth/register', (req, res) => {
   if (users.find(user => user.username === username)) {
     return res.status(400).json({ msg: 'User already exists' });
   }
-  users.push({ username, password });
+  users.push({ username, password, vault: [] });
   writeUsers(users);
 
   res.status(200).json({ msg: 'User registered successfully' });
@@ -120,18 +100,68 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetVault gets the vault for the current user
-// apiRouter.get('/vault', verifyAuth, async (req, res) => {
-//   const user = await findUser('token', req.cookies[authCookieName]);
-//   if (user) {
-//     res.send(vaults[user.email]); //might need to update this line
-//   } else {
-//     res.status(401).send({ msg: 'Unauthorized' });
-//   }
-// });
-
-// GetPic gets a pic from the third party api for the button images
+apiRouter.get('/auth/vault', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    res.send(user.vault);
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
 
 // PutVault updates the vault for the current user
+apiRouter.put('/auth/vault', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.vault = req.body;
+    writeUsers(users);
+    res.send({ msg: 'Vault updated' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+apiRouter.put('/auth/newGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.vault.push(req.body); //adds a new gameDetails object to the vault array
+    writeUsers(users);
+    res.send({ msg: 'Game added' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+apiRouter.put('/auth/updateGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.vault = user.vault.map((game) => {
+      if (game.name === req.body.name) {
+        return req.body;
+      } else {
+        return game;
+      }
+    });
+    writeUsers(users);
+    res.send({ msg: 'Game updated' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+apiRouter.delete('/auth/deleteGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.vault = user.vault.filter((game) => game.name !== req.body.name); //filters out the gameDetails object with the matching name
+    writeUsers(users);
+    res.send({ msg: 'Game deleted' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+
+
 
 // Default error handler
 app.use(function (err, req, res, next) {
@@ -150,6 +180,7 @@ async function createUser(username, password) {
     username: username,
     password: passwordHash,
     token: uuid.v4(),
+    vault: [] // Initialize an empty vault for the user
   };
   users.push(user);
   writeUsers(users);
