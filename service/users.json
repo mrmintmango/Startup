@@ -1,57 +1,30 @@
 [
   {
-    "username": "gengar",
-    "password": "$2b$10$K1D2KtqrTsNmu9IxtG0r7O2U2X7OoAat3/cHUPibohZMIu9bETbfe",
+    "username": "pichu",
+    "password": "$2b$10$UXqWlL.7FjLf09P9562HY.k8K3MkPdfcFd1yZpee7rLkDFgAkeCyy",
+    "token": "a93600a2-3501-409e-af53-981aea3facc5",
     "videoGames": [
       {
-        "name": "Animal Crossing",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
+        "name": "Concord",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "memoriesText": ""
       }
     ],
     "boardGames": [
       {
-        "name": "Monopoly",
+        "name": "Scyth",
         "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
       }
     ],
     "cardGames": [
       {
-        "name": "Magic the Gathering",
+        "name": "Pokemon",
         "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
       }
     ]
-  },
-  {
-    "username": "charmander",
-    "password": "$2b$10$d2d2ag4Me47/6lFxcjoN5OjQguTPs2CEFgDVr4l7GcqhVvDNqWbKi",
-    "videoGames": [
-      {
-        "name": "Mega Man",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
-      },
-      {
-        "name": "Stardew Valley",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
-      },
-      {
-        "name": "Forza 3",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
-      }
-    ],
-    "boardGames": [],
-    "cardGames": []
-  },
-  {
-    "username": "chespin",
-    "password": "$2b$10$UzWD9xqpctRCMupGLYjgNetGUsXWb4k7TgUO8hLY2NezJ4yGuG23G",
-    "token": "16c8c502-f381-4d26-aed9-625486993878",
-    "videoGames": [
-      {
-        "name": "Animal Crossing",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
-      }
-    ],
-    "boardGames": [],
-    "cardGames": []
   }
 ]

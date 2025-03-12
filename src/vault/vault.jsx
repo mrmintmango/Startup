@@ -73,7 +73,11 @@ export function Vault() {
 
   const handleAddVideoGame = async () => {
     if (newVideoGame.trim() !== '') {
-      const newGame = { name: newVideoGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' };
+      const newGame = { name: newVideoGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$', favorite: false,
+        rating: 0,
+        review: '',
+        memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+        memoriesText: '' };
       const response = await fetch('/api/auth/videoGames', {
         method: 'PUT',
         headers: {
@@ -93,7 +97,11 @@ export function Vault() {
 
   const handleAddBoardGame = async () => {
     if (newBoardGame.trim() !== '') {
-      const newGame = { name: newBoardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' };
+      const newGame = { name: newBoardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$', favorite: false,
+        rating: 0,
+        review: '',
+        memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+        memoriesText: '' };
       const response = await fetch('/api/auth/boardGames', {
         method: 'PUT',
         headers: {
@@ -113,7 +121,11 @@ export function Vault() {
 
   const handleAddCardGame = async () => {
     if (newCardGame.trim() !== '') {
-      const newGame = { name: newCardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' };
+      const newGame = { name: newCardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$', favorite: false,
+        rating: 0,
+        review: '',
+        memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+        memoriesText: '' };
       const response = await fetch('/api/auth/cardGames', {
         method: 'PUT',
         headers: {
