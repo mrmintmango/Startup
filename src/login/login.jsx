@@ -19,7 +19,7 @@ export function Login({ setUser }) {
     const endpoint = '/api/auth/login';
     const response = await fetch(endpoint, {
       method: 'POST',
-      body: JSON.stringify({ username: userText }),
+      body: JSON.stringify({ username: userText, password: passText}),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -63,7 +63,7 @@ export function Login({ setUser }) {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     });
-    if (response?.status === 200) {
+    if (response?.status === 200 || response?.status === 204) {
       localStorage.removeItem('user');
       localStorage.removeItem('password');
       setUser(null);

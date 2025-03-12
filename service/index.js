@@ -87,8 +87,9 @@ apiRouter.post('/auth/register', (req, res) => {
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
   const user = await findUser('username', req.body.username);
-  if (user) {
-    if (await bcrypt.compare(req.body.password, user.password)) {
+  if (user && user.password) {
+    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+    if (isPasswordValid) {
       user.token = uuid.v4();
       setAuthCookie(res, user.token);
       res.send({ username: user.username });

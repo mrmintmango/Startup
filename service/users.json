@@ -3,6 +3,19 @@
     "username": "pikachu",
     "password": "$2b$10$t/Jbswk1rTKNvkP11UId8e8rotUsFUGlmwmuKm0jRLPrG5I1R8.q.",
     "token": "1e285303-00b5-4b31-bf7e-e0e7c88e3377"
+  },
+  {
+    "username": "Charizard",
+    "password": "$2b$10$bzNNQWOsARvMJ8v4a5EJfeGpmU.kCM1ckakGRzDjyXBiDeQUAQVOq",
+    "token": "6507a1b8-e521-4096-944d-0a3036b306a2"
+  },
+  {
+    "username": "Squirtle",
+    "password": "$2b$10$6dHYpAFIHit10A7pC2yjaeQqE1dVz.aDfkP9wU/5c5tUVVpY6U9oq"
+  },
+  {
+    "username": "squirtle",
+    "password": "$2b$10$2jkdXsJa0hdIg6oIPsnHLe7Bp9TbccVALfCEivv4d2QAPKSFxgS9m",
+    "token": "8f00dd3f-b138-4c50-888e-f7eb395f79cb"
   }
 ]
-
