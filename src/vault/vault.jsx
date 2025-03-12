@@ -22,12 +22,25 @@ export function Vault() {
   }, [location.search]);
 
   useEffect(() => {
-    const storedVideoGames = JSON.parse(localStorage.getItem('videoGames'));
-    const storedBoardGames = JSON.parse(localStorage.getItem('boardGames'));
-    const storedCardGames = JSON.parse(localStorage.getItem('cardGames'));
-    if (storedVideoGames) setVideoGames(storedVideoGames);
-    if (storedBoardGames) setBoardGames(storedBoardGames);
-    if (storedCardGames) setCardGames(storedCardGames);
+    const fetchVault = async () => {
+      const response = await fetch('/api/auth/vault', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setVideoGames(data.videoGames);
+        setBoardGames(data.boardGames);
+        setCardGames(data.cardGames);
+      } else {
+        const body = await response.json();
+        console.error(`⚠ Error: ${body.msg}`);
+      }
+    };
+
+    fetchVault();
   }, []);
 
   useEffect(() => {
@@ -58,24 +71,63 @@ export function Vault() {
     setNewCardGame(event.target.value);
   };
 
-  const handleAddVideoGame = () => {
+  const handleAddVideoGame = async () => {
     if (newVideoGame.trim() !== '') {
-      setVideoGames([...videoGames, { name: newVideoGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' }]);
-      setNewVideoGame('');
+      const newGame = { name: newVideoGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' };
+      const response = await fetch('/api/auth/videoGames', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(newGame),
+      });
+      if (response.ok) {
+        setVideoGames([...videoGames, newGame]);
+        setNewVideoGame('');
+      } else {
+        const body = await response.json();
+        console.error(`⚠ Error: ${body.msg}`);
+      }
     }
   };
 
-  const handleAddBoardGame = () => {
+  const handleAddBoardGame = async () => {
     if (newBoardGame.trim() !== '') {
-      setBoardGames([...boardGames, { name: newBoardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' }]);
-      setNewBoardGame('');
+      const newGame = { name: newBoardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' };
+      const response = await fetch('/api/auth/boardGames', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(newGame),
+      });
+      if (response.ok) {
+        setBoardGames([...boardGames, newGame]);
+        setNewBoardGame('');
+      } else {
+        const body = await response.json();
+        console.error(`⚠ Error: ${body.msg}`);
+      }
     }
   };
 
-  const handleAddCardGame = () => {
+  const handleAddCardGame = async () => {
     if (newCardGame.trim() !== '') {
-      setCardGames([...cardGames, { name: newCardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' }]);
-      setNewCardGame('');
+      const newGame = { name: newCardGame, imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$' };
+      const response = await fetch('/api/auth/cardGames', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(newGame),
+      });
+      if (response.ok) {
+        setCardGames([...cardGames, newGame]);
+        setNewCardGame('');
+      } else {
+        const body = await response.json();
+        console.error(`⚠ Error: ${body.msg}`);
+      }
     }
   };
 

@@ -279,7 +279,6 @@ async function createUser(username, password) {
 async function findUser(field, value) {
   if (!value) return null;
 
-  console.log(users);
   return users.find((u) => u[field] === value);
 }
 
