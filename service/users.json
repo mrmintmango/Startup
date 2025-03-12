@@ -24,7 +24,27 @@
   {
     "username": "charmander",
     "password": "$2b$10$d2d2ag4Me47/6lFxcjoN5OjQguTPs2CEFgDVr4l7GcqhVvDNqWbKi",
-    "token": "5bd6886c-6c5f-409b-940d-e36699021c2f",
+    "videoGames": [
+      {
+        "name": "Mega Man",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
+      },
+      {
+        "name": "Stardew Valley",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
+      },
+      {
+        "name": "Forza 3",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
+      }
+    ],
+    "boardGames": [],
+    "cardGames": []
+  },
+  {
+    "username": "chespin",
+    "password": "$2b$10$UzWD9xqpctRCMupGLYjgNetGUsXWb4k7TgUO8hLY2NezJ4yGuG23G",
+    "token": "16c8c502-f381-4d26-aed9-625486993878",
     "videoGames": [],
     "boardGames": [],
     "cardGames": []

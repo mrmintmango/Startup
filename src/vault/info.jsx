@@ -17,15 +17,18 @@ export function Info() {
     memoriesText: ''   
   });
 
+  const [gameType, setGameType] = useState('');
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const gameName = params.get('name');
-    if (gameName) {
+    const type = params.get('type');
+    if (gameName && type) {
+      setGameType(type);
       const gameDetails = JSON.parse(localStorage.getItem(gameName));
       if (gameDetails) {
         setGameDetails(gameDetails);
-      }
-      else {
+      } else {
         setGameDetails({
           name: gameName,
           imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
@@ -35,9 +38,8 @@ export function Info() {
           memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
           memoriesText: ''
         });
+      }
     }
-  }
-
   }, [location.search]);
 
   const handleFavoriteChange = () => {
@@ -71,12 +73,8 @@ export function Info() {
     navigate('/vault');
   };
 
-  // const handleSave = () => {
-  //   localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
-  // };
-
   async function handleSave() {
-    const endpoint = '/api/auth/updateGame'; //needs to know what type of game is being updated
+    const endpoint = `/api/auth/update${gameType.slice(0, -1)}Game`; // Construct the endpoint based on game type
     const response = await fetch(endpoint, {
       method: 'POST',
       body: JSON.stringify({ gameDetails }),
@@ -88,23 +86,9 @@ export function Info() {
       localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
     } else {
       const body = await response.json();
-      showError(`⚠ Error: ${body.msg}`);
+      console.error(`⚠ Error: ${body.msg}`);
     }
   }
-
-  //const [rating, setRating] = useState(0);
-  //const [selectedImage, setSelectedImage] = useState('https://media.gamestop.com/i/gamestop/10106497_10106499_10115457_10115461_10115462_10161249_10161250_SCR17/Grand-Theft-Auto-V---PlayStation-4?$screen2x$');
-
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       setGameDetails.memoriesImg(e.target.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
 
   return (
     <main>

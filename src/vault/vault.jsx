@@ -55,8 +55,8 @@ export function Vault() {
     localStorage.setItem('cardGames', JSON.stringify(cardGames));
   }, [cardGames]);
 
-  const handleInfoClick = (game) => {
-    navigate(`/info?name=${game.name}`);
+  const handleInfoClick = (game, type) => {
+    navigate(`/info?name=${game.name}&type=${type}`);
   };
 
   const handleNewVideoGameChange = (event) => {
