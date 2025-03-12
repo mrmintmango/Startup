@@ -150,7 +150,7 @@ export function Vault() {
         <h2 className='scrollTitle'> Video Games </h2>
         <div className="scrollmenu">
           {videoGames.map((game, index) => (
-            <button key={index} onClick={() => handleInfoClick(game)}>
+            <button key={index} onClick={() => handleInfoClick(game, 'Video')}>
               <img alt={game.name} src={game.imgSrc} /><br />{game.name}
             </button>
           ))}
@@ -166,7 +166,7 @@ export function Vault() {
         <h2 className='scrollTitle'> Board Games </h2>
         <div className="scrollmenu">
           {boardGames.map((game, index) => (
-            <button key={index} onClick={() => handleInfoClick(game)}>
+            <button key={index} onClick={() => handleInfoClick(game, 'Board')}>
               <img alt={game.name} src={game.imgSrc} /><br />{game.name}
             </button>
           ))}
@@ -182,7 +182,7 @@ export function Vault() {
         <h2 className='scrollTitle'> Card Games </h2>
         <div className="scrollmenu">
           {cardGames.map((game, index) => (
-            <button key={index} onClick={() => handleInfoClick(game)}>
+            <button key={index} onClick={() => handleInfoClick(game, 'Card')}>
               <img alt={game.name} src={game.imgSrc} /><br />{game.name}
             </button>
           ))}

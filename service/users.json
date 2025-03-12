@@ -12,6 +12,15 @@
         "review": "",
         "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
         "memoriesText": ""
+      },
+      {
+        "name": "Forza 3",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "favorite": false,
+        "rating": 0,
+        "review": "This game is too fast.",
+        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "memoriesText": ""
       }
     ],
     "boardGames": [

@@ -74,7 +74,7 @@ export function Info() {
   };
 
   async function handleSave() {
-    const endpoint = `/api/auth/update${gameType.slice(0, -1)}Game`; // Construct the endpoint based on game type
+    const endpoint = `/api/auth/update${gameType}Game`; // Construct the endpoint based on game type
     const response = await fetch(endpoint, {
       method: 'PUT',
       body: JSON.stringify(gameDetails),
