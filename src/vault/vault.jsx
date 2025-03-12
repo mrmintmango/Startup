@@ -85,7 +85,6 @@ export function Vault() {
       } else {
         console.error('Failed to fetch image from RAWG');
       }
-
       const newGame = {
         name: newVideoGame,
         imgSrc: imgSrc,
@@ -116,15 +115,28 @@ export function Vault() {
 
   const handleAddBoardGame = async () => {
     if (newBoardGame.trim() !== '') {
+      // RAWG API call to search for an image matching the name of the game
+      const rawgResponse = await fetch(`https://api.rawg.io/api/games?key=aa66d5efbc51412db4f5e8264e1712c8&search=${newBoardGame}`);
+
+      let imgSrc = 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$'; // Default image
+      if (rawgResponse.ok) {
+        const rawgData = await rawgResponse.json();
+        if (rawgData.results.length > 0 && rawgData.results[0].background_image) {
+          imgSrc = rawgData.results[0].background_image; // Use the background image from RAWG
+        }
+      } else {
+        console.error('Failed to fetch image from RAWG');
+      }
       const newGame = {
         name: newBoardGame,
-        imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+        imgSrc: imgSrc,
         favorite: false,
         rating: 0,
         review: '',
-        memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+        memoriesImg: imgSrc,
         memoriesText: '',
       };
+
       const response = await fetch('/api/auth/boardGames', {
         method: 'PUT',
         headers: {
@@ -132,6 +144,7 @@ export function Vault() {
         },
         body: JSON.stringify(newGame),
       });
+
       if (response.ok) {
         setBoardGames([...boardGames, newGame]);
         setNewBoardGame('');
@@ -144,15 +157,28 @@ export function Vault() {
 
   const handleAddCardGame = async () => {
     if (newCardGame.trim() !== '') {
+      // RAWG API call to search for an image matching the name of the game
+      const rawgResponse = await fetch(`https://api.rawg.io/api/games?key=aa66d5efbc51412db4f5e8264e1712c8&search=${newCardGame}`);
+
+      let imgSrc = 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$'; // Default image
+      if (rawgResponse.ok) {
+        const rawgData = await rawgResponse.json();
+        if (rawgData.results.length > 0 && rawgData.results[0].background_image) {
+          imgSrc = rawgData.results[0].background_image; // Use the background image from RAWG
+        }
+      } else {
+        console.error('Failed to fetch image from RAWG');
+      }
       const newGame = {
         name: newCardGame,
-        imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+        imgSrc: imgSrc,
         favorite: false,
         rating: 0,
         review: '',
-        memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+        memoriesImg: imgSrc,
         memoriesText: '',
       };
+
       const response = await fetch('/api/auth/cardGames', {
         method: 'PUT',
         headers: {
@@ -160,6 +186,7 @@ export function Vault() {
         },
         body: JSON.stringify(newGame),
       });
+
       if (response.ok) {
         setCardGames([...cardGames, newGame]);
         setNewCardGame('');

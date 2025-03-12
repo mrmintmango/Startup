@@ -182,5 +182,43 @@
     ],
     "boardGames": [],
     "cardGames": []
+  },
+  {
+    "username": "tooth fairy",
+    "password": "$2b$10$cRE0HQZVwqmJ.t.4NjkvIu3A57S0nvRl7KmG1c.aECK4urcdKBXA.",
+    "token": "ba76bee1-0aae-4baa-afe4-80146e2554db",
+    "videoGames": [
+      {
+        "name": "Animal Crossing",
+        "imgSrc": "https://media.rawg.io/media/games/9dc/9dc9fbd2c2054a3a9b7c33a906546bea.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/9dc/9dc9fbd2c2054a3a9b7c33a906546bea.jpg",
+        "memoriesText": ""
+      }
+    ],
+    "boardGames": [
+      {
+        "name": "Clue",
+        "imgSrc": "https://media.rawg.io/media/screenshots/fd5/fd5786fca9adbffaaec2a98730b91fe2.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/screenshots/fd5/fd5786fca9adbffaaec2a98730b91fe2.jpg",
+        "memoriesText": ""
+      }
+    ],
+    "cardGames": [
+      {
+        "name": "Magic the Gathering",
+        "imgSrc": "https://media.rawg.io/media/games/4b5/4b57ce9117952922bb011ff65b79bfa7.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/4b5/4b57ce9117952922bb011ff65b79bfa7.jpg",
+        "memoriesText": ""
+      }
+    ]
   }
 ]

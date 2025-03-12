@@ -35,7 +35,7 @@ let users = readUsers();
 let apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-const PORT = process.argv.length > 2 ? process.argv[2] : 3000;
+const PORT = process.argv.length > 2 ? process.argv[2] : 4000;
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });

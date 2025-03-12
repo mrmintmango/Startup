@@ -9,11 +9,11 @@ export function Info() {
 
   const [gameDetails, setGameDetails] = useState({
     name: '',
-    imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+    imgSrc: '',
     favorite: false,
     rating: 0,
     review: '',
-    memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
+    memoriesImg: '',
     memoriesText: ''   
   });
 
