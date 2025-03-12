@@ -25,20 +25,14 @@ export function Info() {
     const type = params.get('type');
     if (gameName && type) {
       setGameType(type);
-      const gameDetails = JSON.parse(localStorage.getItem(gameName));
-      if (gameDetails) {
-        setGameDetails(gameDetails);
-      } else {
-        setGameDetails({
-          name: gameName,
-          imgSrc: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
-          favorite: false,
-          rating: 0,
-          review: '',
-          memoriesImg: 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$',
-          memoriesText: ''
+      fetch(`/api/games/${gameName}`)
+        .then(response => response.json())
+        .then(data => {
+          setGameDetails(data);
+        })
+        .catch(error => {
+          console.error('Error fetching game details:', error);
         });
-      }
     }
   }, [location.search]);
 
@@ -83,7 +77,6 @@ export function Info() {
       },
     });
     if (response.ok) {
-      localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
       console.log('Game details saved successfully');
     } else {
       const body = await response.json();

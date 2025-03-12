@@ -37,7 +37,6 @@
   {
     "username": "meowth",
     "password": "$2b$10$sKhrAJjUx4kVQ2pZgO3Fo.36hHEjoIj/iOZb3C5a2MDcgJovmfVXi",
-    "token": "15e537b0-be8f-4737-83f7-17104c3a4734",
     "videoGames": [
       {
         "name": "Mega Man",
@@ -50,11 +49,134 @@
       },
       {
         "name": "Animal Crossing",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "memoriesText": ""
+      },
+      {
+        "name": "Cuphead",
+        "imgSrc": "https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg",
+        "memoriesText": ""
+      }
+    ],
+    "boardGames": [],
+    "cardGames": []
+  },
+  {
+    "username": "Name",
+    "password": "$2b$10$KxfafX62itDhMaFq2VNZUOwwsJu3W71Vh9vs1B9btNeNYlBrAqMSm",
+    "videoGames": [
+      {
+        "name": "Animal Crossing",
         "imgSrc": "https://media.rawg.io/media/games/9dc/9dc9fbd2c2054a3a9b7c33a906546bea.jpg",
         "favorite": false,
         "rating": 0,
         "review": "",
         "memoriesImg": "https://media.rawg.io/media/games/9dc/9dc9fbd2c2054a3a9b7c33a906546bea.jpg",
+        "memoriesText": ""
+      }
+    ],
+    "boardGames": [],
+    "cardGames": []
+  },
+  {
+    "username": "user",
+    "password": "$2b$10$RcvtbSRxx5kNUFAu1.di3esDAPyHr2cEPBurwbgyYkpT9EDBmGUzC",
+    "videoGames": [
+      {
+        "name": "Forza 3",
+        "imgSrc": "https://media.rawg.io/media/games/30a/30afe3a3cb06849dc032ef3b9295f180.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/30a/30afe3a3cb06849dc032ef3b9295f180.jpg",
+        "memoriesText": ""
+      },
+      {
+        "name": "Animal Crossing",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "favorite": false,
+        "rating": 0,
+        "review": "dfhdfhfgf",
+        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "memoriesText": ""
+      },
+      {
+        "name": "Mega Man",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "memoriesText": ""
+      },
+      {
+        "name": "Monster Hunter",
+        "imgSrc": "https://media.rawg.io/media/games/2db/2db6973051f88999dca9bae8128c4c96.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/2db/2db6973051f88999dca9bae8128c4c96.jpg",
+        "memoriesText": ""
+      },
+      {
+        "name": "Pokemon Sun",
+        "imgSrc": "https://media.rawg.io/media/screenshots/a00/a0013d8c9ddb1878c2d1030c822b7525.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/screenshots/a00/a0013d8c9ddb1878c2d1030c822b7525.jpg",
+        "memoriesText": ""
+      }
+    ],
+    "boardGames": [],
+    "cardGames": []
+  },
+  {
+    "username": "testUser",
+    "password": "$2b$10$BTXx4u80m8WGlQVDwLuc7.LR0gqZCWy7nY/oCWSHsoa6IdZkTqVk6",
+    "videoGames": [
+      {
+        "name": "Cuphead",
+        "imgSrc": "https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg",
+        "memoriesText": ""
+      },
+      {
+        "name": "Mario Kart",
+        "imgSrc": "https://media.rawg.io/media/screenshots/4ff/4ff80f9119a02de032d9782fa0a475ab.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/screenshots/4ff/4ff80f9119a02de032d9782fa0a475ab.jpg",
+        "memoriesText": ""
+      }
+    ],
+    "boardGames": [],
+    "cardGames": []
+  },
+  {
+    "username": "cheese",
+    "password": "$2b$10$DJ8g8e6Vu4tlCFPAHppGNOn0iFu/JeEg/vX93JwMEyisYA5YV159i",
+    "token": "7d94b2c7-9874-4f58-87d4-83f8f2734141",
+    "videoGames": [
+      {
+        "name": "Mario Party",
+        "imgSrc": "https://media.rawg.io/media/games/576/576759570d5f9e67d4f1398e73a79bef.jpg",
+        "favorite": true,
+        "rating": 3,
+        "review": "testestf",
+        "memoriesImg": "https://media.rawg.io/media/games/576/576759570d5f9e67d4f1398e73a79bef.jpg",
         "memoriesText": ""
       }
     ],

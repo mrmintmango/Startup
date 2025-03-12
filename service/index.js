@@ -1,4 +1,3 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
@@ -39,6 +38,26 @@ app.use('/api', apiRouter);
 const PORT = process.argv.length > 2 ? process.argv[2] : 3000;
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
+});
+
+// Endpoint to fetch game details by name
+app.get('/api/games/:name', (req, res) => {
+  const gameName = req.params.name;
+  const users = readUsers();
+
+  let game = null;
+  for (const user of users) {
+    game = user.videoGames.find(game => game.name === gameName) ||
+           user.boardGames.find(game => game.name === gameName) ||
+           user.cardGames.find(game => game.name === gameName);
+    if (game) break;
+  }
+
+  if (game) {
+    res.json(game);
+  } else {
+    res.status(404).json({ msg: 'Game not found' });
+  }
 });
 
 // CreateAuth a new user
@@ -249,19 +268,6 @@ apiRouter.delete('/auth/deleteCardGame', verifyAuth, async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
-
-// Proxy route for IGDB API
-// app.use('/api/igdb', createProxyMiddleware({
-//   target: 'https://api.igdb.com',
-//   changeOrigin: true,
-//   pathRewrite: {
-//     '^/api/igdb': '/v4/games',
-//   },
-//   onProxyReq: (proxyReq, req, res) => {
-//     proxyReq.setHeader('Client-ID', 'avi12gowsh9c41zvjyi4yu8s4hnn63'); // Insert your Client ID here
-//     proxyReq.setHeader('Authorization', `Bearer ${req.headers['access-token']}`);
-//   },
-// }));
 
 // Default error handler
 app.use(function (err, req, res, next) {
