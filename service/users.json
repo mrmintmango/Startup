@@ -45,7 +45,12 @@
     "username": "chespin",
     "password": "$2b$10$UzWD9xqpctRCMupGLYjgNetGUsXWb4k7TgUO8hLY2NezJ4yGuG23G",
     "token": "16c8c502-f381-4d26-aed9-625486993878",
-    "videoGames": [],
+    "videoGames": [
+      {
+        "name": "Animal Crossing",
+        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
+      }
+    ],
     "boardGames": [],
     "cardGames": []
   }

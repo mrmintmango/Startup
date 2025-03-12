@@ -76,14 +76,15 @@ export function Info() {
   async function handleSave() {
     const endpoint = `/api/auth/update${gameType.slice(0, -1)}Game`; // Construct the endpoint based on game type
     const response = await fetch(endpoint, {
-      method: 'POST',
-      body: JSON.stringify({ gameDetails }),
+      method: 'PUT',
+      body: JSON.stringify(gameDetails),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     });
-    if (response?.status === 200) {
+    if (response.ok) {
       localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
+      console.log('Game details saved successfully');
     } else {
       const body = await response.json();
       console.error(`⚠ Error: ${body.msg}`);

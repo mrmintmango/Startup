@@ -165,7 +165,7 @@ apiRouter.put('/auth/updateVideoGame', verifyAuth, async (req, res) => {
   if (user) {
     user.videoGames = user.videoGames.map((game) => {
       if (game.name === req.body.name) {
-        return req.body;
+        return { ...game, ...req.body };
       } else {
         return game;
       }
@@ -183,7 +183,7 @@ apiRouter.put('/auth/updateBoardGame', verifyAuth, async (req, res) => {
   if (user) {
     user.boardGames = user.boardGames.map((game) => {
       if (game.name === req.body.name) {
-        return req.body;
+        return { ...game, ...req.body };
       } else {
         return game;
       }
@@ -201,7 +201,7 @@ apiRouter.put('/auth/updateCardGame', verifyAuth, async (req, res) => {
   if (user) {
     user.cardGames = user.cardGames.map((game) => {
       if (game.name === req.body.name) {
-        return req.body;
+        return { ...game, ...req.body };
       } else {
         return game;
       }
