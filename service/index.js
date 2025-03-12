@@ -29,9 +29,28 @@ const readUsers = () => {
   return JSON.parse(usersData);
 };
 
+// // Helper function to write vaults to the file
+// const writeVault = (vaults) => {
+//   fs.writeFileSync(vaultsFilePath, JSON.stringify(vaults, null, 2));
+// };
+
+// // Helper function to read vaults from the file
+// const readVaults = () => {
+//   if (!fs.existsSync(vaultsFilePath)) {
+//     return [];
+//   }
+//   const vaultsData = fs.readFileSync(vaultsFilePath);
+//   return JSON.parse(vaultsData);
+// };
+
+// const updateVault = (email, vault) => {
+//   vaults[email] = vault;
+//   writeVault(vaults);
+// }
+
 // Initialize users from the file
 let users = readUsers();
-let vaults = [];
+//let vaults = readVaults();
 
 let apiRouter = express.Router();
 app.use('/api', apiRouter);
