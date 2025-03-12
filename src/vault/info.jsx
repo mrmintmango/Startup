@@ -6,9 +6,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 export function Info() {
   const navigate = useNavigate();
   const location = useLocation();
-  // const handleInfoClick = () => {
-  //   navigate('/vault');
-  // };
 
   const [gameDetails, setGameDetails] = useState({
     name: '',
@@ -40,7 +37,6 @@ export function Info() {
         });
     }
   }
-    
 
   }, [location.search]);
 
@@ -80,7 +76,7 @@ export function Info() {
   // };
 
   async function handleSave() {
-    const endpoint = '/api/auth/updateGame';
+    const endpoint = '/api/auth/updateGame'; //needs to know what type of game is being updated
     const response = await fetch(endpoint, {
       method: 'POST',
       body: JSON.stringify({ gameDetails }),
