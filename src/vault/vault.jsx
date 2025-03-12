@@ -12,7 +12,6 @@ export function Vault() {
   const [newBoardGame, setNewBoardGame] = useState('');
   const [newCardGame, setNewCardGame] = useState('');
   const [friendName, setFriendName] = useState(localStorage.getItem('user'));
-  const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -56,35 +55,6 @@ export function Vault() {
     localStorage.setItem('cardGames', JSON.stringify(cardGames));
   }, [cardGames]);
 
-  useEffect(() => {
-    const fetchAccessToken = async () => {
-      const clientId = 'avi12gowsh9c41zvjyi4yu8s4hnn63'; // Insert your Client ID here
-      const clientSecret = 'jrspvgpwqs08b70jlxbsotx3w5nc2a'; // Insert your Client Secret here
-
-      const response = await fetch('https://id.twitch.tv/oauth2/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          client_id: clientId,
-          client_secret: clientSecret,
-          grant_type: 'client_credentials',
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setAccessToken(data.access_token);
-      } else {
-        const body = await response.json();
-        console.error(`⚠ Error: ${body.message}`);
-      }
-    };
-
-    fetchAccessToken();
-  }, []);
-
   const handleInfoClick = (game, type) => {
     navigate(`/info?name=${game.name}&type=${type}`);
   };
@@ -103,27 +73,17 @@ export function Vault() {
 
   const handleAddVideoGame = async () => {
     if (newVideoGame.trim() !== '') {
-      // IGDB API call to search for an image matching the name of the game
-      const igdbResponse = await fetch('/api/igdb', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': accessToken,
-        },
-        body: JSON.stringify({
-          search: newVideoGame,
-          fields: 'name,cover.url',
-        }),
-      });
+      // RAWG API call to search for an image matching the name of the game
+      const rawgResponse = await fetch(`https://api.rawg.io/api/games?key=aa66d5efbc51412db4f5e8264e1712c8&search=${newVideoGame}`);
 
       let imgSrc = 'https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$'; // Default image
-      if (igdbResponse.ok) {
-        const igdbData = await igdbResponse.json();
-        if (igdbData.length > 0 && igdbData[0].cover) {
-          imgSrc = igdbData[0].cover.url.replace('t_thumb', 't_cover_big'); // Use a larger image size
+      if (rawgResponse.ok) {
+        const rawgData = await rawgResponse.json();
+        if (rawgData.results.length > 0 && rawgData.results[0].background_image) {
+          imgSrc = rawgData.results[0].background_image; // Use the background image from RAWG
         }
       } else {
-        console.error('Failed to fetch image from IGDB');
+        console.error('Failed to fetch image from RAWG');
       }
 
       const newGame = {

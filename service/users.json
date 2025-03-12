@@ -1,29 +1,10 @@
 [
   {
-    "username": "pichu",
-    "password": "$2b$10$UXqWlL.7FjLf09P9562HY.k8K3MkPdfcFd1yZpee7rLkDFgAkeCyy",
-    "token": "a93600a2-3501-409e-af53-981aea3facc5",
+    "username": "garchomp",
+    "password": "$2b$10$fqaL8VXB7Zgr5rLMvqcvceBLNTJrzVuOnfHPUkA3FBO3xAwklu91e",
     "videoGames": [
       {
-        "name": "Concord",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
-        "favorite": false,
-        "rating": 0,
-        "review": "",
-        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
-        "memoriesText": ""
-      },
-      {
-        "name": "Forza 3",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
-        "favorite": false,
-        "rating": 0,
-        "review": "This game is too fast.",
-        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
-        "memoriesText": ""
-      },
-      {
-        "name": "Animal Crossing",
+        "name": "Mega Man",
         "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
         "favorite": false,
         "rating": 0,
@@ -41,35 +22,43 @@
         "memoriesText": ""
       },
       {
-        "name": "Animal Crossing",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "name": "Witcher3",
+        "imgSrc": "https://media.rawg.io/media/screenshots/995/9959989bb48350adc3c7eca380a90169.jpg",
         "favorite": false,
         "rating": 0,
         "review": "",
-        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
-        "memoriesText": ""
-      },
-      {
-        "name": "Animal Crossing",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
-        "favorite": false,
-        "rating": 0,
-        "review": "",
-        "memoriesImg": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$",
+        "memoriesImg": "https://media.rawg.io/media/screenshots/995/9959989bb48350adc3c7eca380a90169.jpg",
         "memoriesText": ""
       }
     ],
-    "boardGames": [
+    "boardGames": [],
+    "cardGames": []
+  },
+  {
+    "username": "meowth",
+    "password": "$2b$10$sKhrAJjUx4kVQ2pZgO3Fo.36hHEjoIj/iOZb3C5a2MDcgJovmfVXi",
+    "token": "15e537b0-be8f-4737-83f7-17104c3a4734",
+    "videoGames": [
       {
-        "name": "Scyth",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
+        "name": "Mega Man",
+        "imgSrc": "https://media.rawg.io/media/games/f78/f7809ab885f7464845681e5931aabeb8.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/f78/f7809ab885f7464845681e5931aabeb8.jpg",
+        "memoriesText": ""
+      },
+      {
+        "name": "Animal Crossing",
+        "imgSrc": "https://media.rawg.io/media/games/9dc/9dc9fbd2c2054a3a9b7c33a906546bea.jpg",
+        "favorite": false,
+        "rating": 0,
+        "review": "",
+        "memoriesImg": "https://media.rawg.io/media/games/9dc/9dc9fbd2c2054a3a9b7c33a906546bea.jpg",
+        "memoriesText": ""
       }
     ],
-    "cardGames": [
-      {
-        "name": "Pokemon",
-        "imgSrc": "https://media.gamestop.com/i/gamestop/10141928/Mario-Kart-8?$pdp2x$"
-      }
-    ]
+    "boardGames": [],
+    "cardGames": []
   }
 ]
