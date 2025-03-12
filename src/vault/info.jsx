@@ -75,9 +75,26 @@ export function Info() {
     navigate('/vault');
   };
 
-  const handleSave = () => {
-    localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
-  };
+  // const handleSave = () => {
+  //   localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
+  // };
+
+  async function handleSave() {
+    const endpoint = '/api/auth/updateGame';
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({ gameDetails }),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.setItem(gameDetails.name, JSON.stringify(gameDetails));
+    } else {
+      const body = await response.json();
+      showError(`⚠ Error: ${body.msg}`);
+    }
+  }
 
   //const [rating, setRating] = useState(0);
   //const [selectedImage, setSelectedImage] = useState('https://media.gamestop.com/i/gamestop/10106497_10106499_10115457_10115461_10115462_10161249_10161250_SCR17/Grand-Theft-Auto-V---PlayStation-4?$screen2x$');

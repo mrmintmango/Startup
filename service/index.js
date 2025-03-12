@@ -58,7 +58,7 @@ apiRouter.post('/auth/register', (req, res) => {
   if (users.find(user => user.username === username)) {
     return res.status(400).json({ msg: 'User already exists' });
   }
-  users.push({ username, password, vault: [] });
+  users.push({ username, password, videoGames: [], boardGames: [], cardGames: [] });
   writeUsers(users);
 
   res.status(200).json({ msg: 'User registered successfully' });
@@ -103,7 +103,7 @@ const verifyAuth = async (req, res, next) => {
 apiRouter.get('/auth/vault', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    res.send(user.vault);
+    res.send({ videoGames: user.videoGames, boardGames: user.boardGames, cardGames: user.cardGames });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }
@@ -113,7 +113,9 @@ apiRouter.get('/auth/vault', verifyAuth, async (req, res) => {
 apiRouter.put('/auth/vault', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    user.vault = req.body;
+    user.videoGames = req.body.videoGames;
+    user.boardGames = req.body.boardGames;
+    user.cardGames = req.body.cardGames;
     writeUsers(users);
     res.send({ msg: 'Vault updated' });
   } else {
@@ -121,21 +123,47 @@ apiRouter.put('/auth/vault', verifyAuth, async (req, res) => {
   }
 });
 
-apiRouter.put('/auth/newGame', verifyAuth, async (req, res) => {
+// Add a new game to the video games list
+apiRouter.put('/auth/videoGames', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    user.vault.push(req.body); //adds a new gameDetails object to the vault array
+    user.videoGames.push(req.body);
     writeUsers(users);
-    res.send({ msg: 'Game added' });
+    res.send({ msg: 'Video game added' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
 
-apiRouter.put('/auth/updateGame', verifyAuth, async (req, res) => {
+// Add a new game to the board games list
+apiRouter.put('/auth/boardGames', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    user.vault = user.vault.map((game) => {
+    user.boardGames.push(req.body);
+    writeUsers(users);
+    res.send({ msg: 'Board game added' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+// Add a new game to the card games list
+apiRouter.put('/auth/cardGames', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.cardGames.push(req.body);
+    writeUsers(users);
+    res.send({ msg: 'Card game added' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+// Update a video game in the video games list
+apiRouter.put('/auth/updateVideoGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.videoGames = user.videoGames.map((game) => {
       if (game.name === req.body.name) {
         return req.body;
       } else {
@@ -143,25 +171,83 @@ apiRouter.put('/auth/updateGame', verifyAuth, async (req, res) => {
       }
     });
     writeUsers(users);
-    res.send({ msg: 'Game updated' });
+    res.send({ msg: 'Video game updated' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
 
-apiRouter.delete('/auth/deleteGame', verifyAuth, async (req, res) => {
+// Update a board game in the board games list
+apiRouter.put('/auth/updateBoardGame', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    user.vault = user.vault.filter((game) => game.name !== req.body.name); //filters out the gameDetails object with the matching name
+    user.boardGames = user.boardGames.map((game) => {
+      if (game.name === req.body.name) {
+        return req.body;
+      } else {
+        return game;
+      }
+    });
     writeUsers(users);
-    res.send({ msg: 'Game deleted' });
+    res.send({ msg: 'Board game updated' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
 
+// Update a card game in the card games list
+apiRouter.put('/auth/updateCardGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.cardGames = user.cardGames.map((game) => {
+      if (game.name === req.body.name) {
+        return req.body;
+      } else {
+        return game;
+      }
+    });
+    writeUsers(users);
+    res.send({ msg: 'Card game updated' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
 
+// Delete a video game from the video games list
+apiRouter.delete('/auth/deleteVideoGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.videoGames = user.videoGames.filter((game) => game.name !== req.body.name);
+    writeUsers(users);
+    res.send({ msg: 'Video game deleted' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
 
+// Delete a board game from the board games list
+apiRouter.delete('/auth/deleteBoardGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.boardGames = user.boardGames.filter((game) => game.name !== req.body.name);
+    writeUsers(users);
+    res.send({ msg: 'Board game deleted' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+// Delete a card game from the card games list
+apiRouter.delete('/auth/deleteCardGame', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    user.cardGames = user.cardGames.filter((game) => game.name !== req.body.name);
+    writeUsers(users);
+    res.send({ msg: 'Card game deleted' });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
 
 // Default error handler
 app.use(function (err, req, res, next) {
@@ -180,7 +266,9 @@ async function createUser(username, password) {
     username: username,
     password: passwordHash,
     token: uuid.v4(),
-    vault: [] // Initialize an empty vault for the user
+    videoGames: [], // Initialize an empty video games list for the user
+    boardGames: [], // Initialize an empty board games list for the user
+    cardGames: [] // Initialize an empty card games list for the user
   };
   users.push(user);
   writeUsers(users);
