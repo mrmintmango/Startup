@@ -1,3 +1,9 @@
+ /* login.css */
+.error {
+  color: darkred;
+  font-weight: bold;
+  margin-top: 10px;
+}
  .mainLogin{
   background-color: grey;
  }

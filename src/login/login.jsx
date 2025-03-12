@@ -19,7 +19,7 @@ export function Login({ setUser }) {
     const endpoint = '/api/auth/login';
     const response = await fetch(endpoint, {
       method: 'POST',
-      body: JSON.stringify({ username: userText, password: passText}),
+      body: JSON.stringify({ username: userText, password: passText }),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -31,7 +31,7 @@ export function Login({ setUser }) {
       navigate('/vault');
     } else {
       const body = await response.json();
-      setDisplayError(`⚠ Error: ${body.msg}`);
+      showError(`⚠ Error: ${body.msg}`);
     }
   }
 
@@ -51,7 +51,7 @@ export function Login({ setUser }) {
       navigate('/vault');
     } else {
       const body = await response.json();
-      setDisplayError(`⚠ Error: ${body.msg}`);
+      showError(`⚠ Error: ${body.msg}`);
     }
   }
 
@@ -70,8 +70,15 @@ export function Login({ setUser }) {
       navigate('/');
     } else {
       const body = await response.json();
-      setDisplayError(`⚠ Error: ${body.msg}`);
+      showError(`⚠ Error: ${body.msg}`);
     }
+  }
+
+  function showError(message) {
+    setDisplayError(message);
+    setTimeout(() => {
+      setDisplayError('');
+    }, 5000); // Clear the error message after 5 seconds
   }
 
   return (
