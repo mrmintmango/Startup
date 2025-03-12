@@ -1,3 +1,4 @@
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
@@ -248,6 +249,19 @@ apiRouter.delete('/auth/deleteCardGame', verifyAuth, async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
+
+// Proxy route for IGDB API
+app.use('/api/igdb', createProxyMiddleware({
+  target: 'https://api.igdb.com',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/igdb': '/v4/games',
+  },
+  onProxyReq: (proxyReq, req, res) => {
+    proxyReq.setHeader('Client-ID', 'avi12gowsh9c41zvjyi4yu8s4hnn63'); // Insert your Client ID here
+    proxyReq.setHeader('Authorization', `Bearer ${req.headers['access-token']}`);
+  },
+}));
 
 // Default error handler
 app.use(function (err, req, res, next) {
