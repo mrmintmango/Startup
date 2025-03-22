@@ -4,6 +4,7 @@ const uuid = require('uuid');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const DB = require('./database.js');
 
 const app = express();
 
@@ -290,8 +291,7 @@ async function createUser(username, password) {
     boardGames: [], // Initialize an empty board games list for the user
     cardGames: [] // Initialize an empty card games list for the user
   };
-  users.push(user);
-  writeUsers(users);
+  await DB.addUser(user); // Save the user to the database
 
   return user;
 }
