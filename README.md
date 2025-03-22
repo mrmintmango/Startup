@@ -110,11 +110,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - I configured this to work properly and make a backend server with express.
+- [x] **Static middleware for frontend** - I made the middleware to connect the frontend to the back end, I don't know everything that's going on under the hood but I'm glad it's working. 
+- [x] **Calls to third party endpoints** - It took me so long to figure this out! Just kidding, I was just using the wrong one, but I found a good one that works perfectly and now each button has a picture that matches the game that the user adds to their vault. I think a thread issue causes the first games info images to still be mario kart but that's okay!
+- [x] **Backend service endpoints** - I made a lot of end points to properly manage all of the info that I'm going to store and retrieve from the server. 
+- [x] **Frontend calls service endpoints** - I got the fronted to call all of the backend endpoints to populate the vault page and info pages. It was so satisfing when this started working! 
 
 ## 🚀 DB/Login deliverable
 
