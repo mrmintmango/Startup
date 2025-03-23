@@ -5,7 +5,7 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 
 const client = new MongoClient(url);
 const db = client.db('theGameVault');
-const usersCollection = db.collection('users');
+const userCollection = db.collection('users');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
