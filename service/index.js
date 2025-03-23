@@ -42,22 +42,26 @@ app.listen(PORT, () => {
 });
 
 // Endpoint to fetch game details by name
-app.get('/api/games/:name', (req, res) => {
+app.get('/api/games/:name', async (req, res) => {
   const gameName = req.params.name;
-  const users = readUsers();
 
-  let game = null;
-  for (const user of users) {
-    game = user.videoGames.find(game => game.name === gameName) ||
-           user.boardGames.find(game => game.name === gameName) ||
-           user.cardGames.find(game => game.name === gameName);
-    if (game) break;
-  }
+  try {
+    // Query the database for the game in videoGames, boardGames, or cardGames
+    const videoGame = await DB.getVideoGameByName(gameName);
+    const boardGame = await DB.getBoardGameByName(gameName);
+    const cardGame = await DB.getCardGameByName(gameName);
 
-  if (game) {
-    res.json(game);
-  } else {
-    res.status(404).json({ msg: 'Game not found' });
+    // Check which collection contains the game
+    const game = videoGame || boardGame || cardGame;
+
+    if (game) {
+      res.json(game);
+    } else {
+      res.status(404).json({ msg: 'Game not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching game details:', error);
+    res.status(500).json({ msg: 'Internal server error' });
   }
 });
 
@@ -73,17 +77,17 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
-apiRouter.post('/auth/register', (req, res) => {
-  const { username, password } = req.body;
+// apiRouter.post('/auth/register', (req, res) => {
+//   const { username, password } = req.body;
 
-  if (users.find(user => user.username === username)) {
-    return res.status(400).json({ msg: 'User already exists' });
-  }
-  users.push({ username, password, videoGames: [], boardGames: [], cardGames: [] });
-  writeUsers(users);
+//   if (users.find(user => user.username === username)) {
+//     return res.status(400).json({ msg: 'User already exists' });
+//   }
+//   users.push({ username, password, videoGames: [], boardGames: [], cardGames: [] });
+//   writeUsers(users);
 
-  res.status(200).json({ msg: 'User registered successfully' });
-});
+//   res.status(200).json({ msg: 'User registered successfully' });
+// });
 
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
@@ -92,6 +96,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
     if (isPasswordValid) {
       user.token = uuid.v4();
+      await DB.updateUser(user);
       setAuthCookie(res, user.token);
       res.send({ username: user.username });
       return;
@@ -105,6 +110,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     delete user.token;
+    DB.updateUser(user);
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
@@ -137,7 +143,7 @@ apiRouter.put('/auth/vault', verifyAuth, async (req, res) => {
     user.videoGames = req.body.videoGames;
     user.boardGames = req.body.boardGames;
     user.cardGames = req.body.cardGames;
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Vault updated' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -149,7 +155,7 @@ apiRouter.put('/auth/videoGames', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     user.videoGames.push(req.body);
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Video game added' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -161,7 +167,7 @@ apiRouter.put('/auth/boardGames', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     user.boardGames.push(req.body);
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Board game added' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -173,7 +179,7 @@ apiRouter.put('/auth/cardGames', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     user.cardGames.push(req.body);
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Card game added' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -191,7 +197,7 @@ apiRouter.put('/auth/updateVideoGame', verifyAuth, async (req, res) => {
         return game;
       }
     });
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Video game updated' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -209,7 +215,7 @@ apiRouter.put('/auth/updateBoardGame', verifyAuth, async (req, res) => {
         return game;
       }
     });
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Board game updated' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -227,7 +233,7 @@ apiRouter.put('/auth/updateCardGame', verifyAuth, async (req, res) => {
         return game;
       }
     });
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Card game updated' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -239,7 +245,7 @@ apiRouter.delete('/auth/deleteVideoGame', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     user.videoGames = user.videoGames.filter((game) => game.name !== req.body.name);
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Video game deleted' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -251,7 +257,7 @@ apiRouter.delete('/auth/deleteBoardGame', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     user.boardGames = user.boardGames.filter((game) => game.name !== req.body.name);
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Board game deleted' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -263,7 +269,7 @@ apiRouter.delete('/auth/deleteCardGame', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     user.cardGames = user.cardGames.filter((game) => game.name !== req.body.name);
-    writeUsers(users);
+    DB.updateUser(user);
     res.send({ msg: 'Card game deleted' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });

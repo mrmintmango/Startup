@@ -18,8 +18,8 @@ const userCollection = db.collection('users');
     }
   })();
 
-  function getUser(email) {
-    return userCollection.findOne({ email: email });
+  function getUser(username) {
+    return userCollection.findOne({ username: username });
   }
   
   function getUserByToken(token) {
@@ -30,30 +30,41 @@ const userCollection = db.collection('users');
     await userCollection.insertOne(user);
   }
   
+  async function getVideoGameByName(user, name) {
+    const result = await userCollection.findOne({
+      username: user.username, 'videoGames.name': name},
+      { projection: { 'videoGames.$': 1 }}
+    );
+    return result && result.videoGames ? result.videoGames[0] : null;
+  }
+  
+  async function getBoardGameByName(user, name) {
+    const result = await userCollection.findOne(
+      { username: user.username, 'boardGames.name': name },
+      { projection: { 'boardGames.$': 1 } } // Only return the matching game
+    );
+    return result && result.boardGames ? result.boardGames[0] : null;
+  }
+  
+  async function getCardGameByName(user, name) {
+    const result = await userCollection.findOne(
+      { username: user.username, 'cardGames.name': name },
+      { projection: { 'cardGames.$': 1 } } // Only return the matching game
+    );
+    return result && result.cardGames ? result.cardGames[0] : null;
+  }
+  
   async function updateUser(user) {
-    await userCollection.updateOne({ email: user.email }, { $set: user });
-  }
-  
-  async function addScore(score) {
-    return scoreCollection.insertOne(score);
-  }
-  
-  function getHighScores() {
-    const query = { score: { $gt: 0, $lt: 900 } };
-    const options = {
-      sort: { score: -1 },
-      limit: 10,
-    };
-    const cursor = scoreCollection.find(query, options);
-    return cursor.toArray();
+    await userCollection.updateOne({ username: user.username }, { $set: user });
   }
   
   module.exports = {
     getUser,
     getUserByToken,
     addUser,
-    updateUser,
-    addScore,
-    getHighScores,
+    getVideoGameByName,
+    getBoardGameByName,
+    getCardGameByName,
+    updateUser
   };
   
