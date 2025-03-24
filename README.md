@@ -120,11 +120,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **User registration** - I did not complete this part of the deliverable.
-- [ ] **User login and logout** - I did not complete this part of the deliverable.
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Restricts functionality based on authentication** - I did not complete this part of the deliverable.
+- [x] **User registration** - I ported over the user registration so that mongodb stores their credentials!
+- [x] **User login and logout** - My code checks mongo first if the user exists before logging them in and logging out correctly deletes their auth.
+- [x] **Stores data in MongoDB** - All my data is cozy in safe in their new mongo db home. It stores a list of users and each user has subelements of games and game info for each game! It works so well!
+- [x] **Stores credentials in MongoDB** - The credentials, aka auth, is stored in mongo. 
+- [x] **Restricts functionality based on authentication** - If a user is logged out then they can't access any vault things until they either log in or register. 
 
 ## 🚀 WebSocket deliverable
 
