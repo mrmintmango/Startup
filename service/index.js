@@ -44,12 +44,13 @@ app.listen(PORT, () => {
 // Endpoint to fetch game details by name
 app.get('/api/games/:name', async (req, res) => {
   const gameName = req.params.name;
+  const user = await findUser('token', req.cookies[authCookieName]);
 
   try {
     // Query the database for the game in videoGames, boardGames, or cardGames
-    const videoGame = await DB.getVideoGameByName(gameName);
-    const boardGame = await DB.getBoardGameByName(gameName);
-    const cardGame = await DB.getCardGameByName(gameName);
+    const videoGame = await DB.getVideoGameByName(user, gameName);
+    const boardGame = await DB.getBoardGameByName(user, gameName);
+    const cardGame = await DB.getCardGameByName(user, gameName);
 
     // Check which collection contains the game
     const game = videoGame || boardGame || cardGame;
@@ -76,18 +77,6 @@ apiRouter.post('/auth/create', async (req, res) => {
     res.send({ username: user.username });
   }
 });
-
-// apiRouter.post('/auth/register', (req, res) => {
-//   const { username, password } = req.body;
-
-//   if (users.find(user => user.username === username)) {
-//     return res.status(400).json({ msg: 'User already exists' });
-//   }
-//   users.push({ username, password, videoGames: [], boardGames: [], cardGames: [] });
-//   writeUsers(users);
-
-//   res.status(200).json({ msg: 'User registered successfully' });
-// });
 
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
