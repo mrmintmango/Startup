@@ -110,6 +110,35 @@ apiRouter.get('/auth/friends', verifyAuth, async (req, res) => {
   }
 });
 
+// Add a new friend to the user's friends list
+apiRouter.put('/auth/friends', verifyAuth, async (req, res) => {
+  try {
+    const user = await DB.getUserByToken(req.cookies[authCookieName]);
+    if (user) {
+      const newFriend = req.body;
+
+      // Check if the friend exists in the database
+      const friendExists = await DB.getUser(newFriend.name);
+      if (!friendExists) {
+        return res.status(404).send({ msg: 'User not found' });
+      }
+
+      // Ensure the friends list exists
+      if (!user.friends) {
+        user.friends = [];
+      }
+      user.friends.push(newFriend);
+      await DB.updateUser(user);
+      res.status(200).send({ msg: 'Friend added successfully' });
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error adding friend:', error);
+    res.status(500).send({ msg: 'Internal server error' });
+  }
+});
+
 // GetVault gets the vault for the current user
 apiRouter.get('/auth/vault', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
