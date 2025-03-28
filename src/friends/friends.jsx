@@ -10,6 +10,8 @@ export function Friends() {
   const [errorMessage, setErrorMessage] = useState(''); // State to store error messages
   const [reviews, setReviews] = useState([]); // State to store reviews
   const [newReview, setNewReview] = useState(''); // State for the new review input
+  const [games, setGames] = useState([]); // State to store the user's games
+  const [selectedGame, setSelectedGame] = useState(null); // State for the selected game
 
 
   useEffect(() => {
@@ -137,6 +139,9 @@ export function Friends() {
           <div className="review-input">
             <select>
             <option value="" disabled>Select a game</option>
+            {games.map((game, index) => (
+                <option key={index} value={game.name}>{game.name}</option>
+              ))}
             </select>
             <textarea placeholder="Write a review..." value={newReview} onChange={handleNewReviewChange}></textarea>
             <button type="button" onClick={handleAddReview}>Post</button>
