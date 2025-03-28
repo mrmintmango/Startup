@@ -9,12 +9,6 @@ export function Friends() {
     { name: "Joe", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
     { name: "Jim", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
     { name: "Rik", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Mat", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Pam", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Bub", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Cad", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Rub", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Mae", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
   ]);
   const [newFriend, setNewFriend] = useState('');
 

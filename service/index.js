@@ -2,8 +2,6 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const DB = require('./database.js');
 
 const app = express();
@@ -12,26 +10,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 
-const usersFilePath = path.join(__dirname, 'users.json');
-
 const authCookieName = 'token';
-
-// Helper function to write users to the file
-const writeUsers = (users) => {
-  fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
-};
-
-// Helper function to read users from the file
-const readUsers = () => {
-  if (!fs.existsSync(usersFilePath)) {
-    return [];
-  }
-  const usersData = fs.readFileSync(usersFilePath);
-  return JSON.parse(usersData);
-};
-
-// Initialize users from the file
-let users = readUsers();
 
 let apiRouter = express.Router();
 app.use('/api', apiRouter);
@@ -284,7 +263,8 @@ async function createUser(username, password) {
     token: uuid.v4(),
     videoGames: [], // Initialize an empty video games list for the user
     boardGames: [], // Initialize an empty board games list for the user
-    cardGames: [] // Initialize an empty card games list for the user
+    cardGames: [], // Initialize an empty card games list for the user
+    friends: [] // Initialize an empty friends list for the user
   };
   await DB.addUser(user); // Save the user to the database
 
