@@ -94,6 +94,22 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
+// Get the friends list for the current user
+apiRouter.get('/auth/friends', verifyAuth, async (req, res) => {
+  try {
+    const user = await DB.getUserByToken(req.cookies[authCookieName]);
+
+    if (user) {
+      res.json({ friends: user.friends || [] }); // Assuming the user's document has a "friends" array
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error fetching friends list:', error);
+    res.status(500).send({ msg: 'Internal server error' });
+  }
+});
+
 // GetVault gets the vault for the current user
 apiRouter.get('/auth/vault', verifyAuth, async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);

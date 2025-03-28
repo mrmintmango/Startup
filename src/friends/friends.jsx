@@ -6,9 +6,7 @@ export function Friends() {
   const navigate = useNavigate();
   const [friends, setFriends] = useState([
     { name: "Bob", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Joe", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Jim", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
-    { name: "Rik", imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' },
+
   ]);
   const [newFriend, setNewFriend] = useState('');
 
@@ -22,7 +20,7 @@ export function Friends() {
 
   const handleAddFriend = () => {
     if (newFriend.trim() !== '') {
-      setFriends([...friends, { name: newFriend, imgSrc: 'https://via.placeholder.com/150' }]);
+      setFriends([...friends, { name: newFriend, imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg' }]);
       setNewFriend('');
     }
   };

@@ -57,3 +57,27 @@ input[type="search"]{
     width: 20vw;
     height: 2vw;
 }
+
+.friendmain {
+    text-align: center;
+  }
+  
+  .friend-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .friend-profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .friend-name {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
