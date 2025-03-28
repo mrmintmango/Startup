@@ -90,6 +90,17 @@ export function Friends() {
     }
   };
 
+  const handleNewReviewChange = (event) => {
+    setNewReview(event.target.value);
+  };
+
+  const handleAddReview = () => {
+    if (newReview.trim() !== '') {
+      setReviews([...reviews, newReview]); // Add the new review to the reviews list
+      setNewReview(''); // Clear the input field
+    }
+  };
+
   return (
     <main className="friendmain">
       <div>
@@ -101,7 +112,6 @@ export function Friends() {
             </button>
           ))}
         </div>
-
         <div>
           <p>Add Friend:</p>
           <div className="center">
@@ -115,6 +125,15 @@ export function Friends() {
             <button type="button" onClick={handleAddFriend}>Add</button>
           </div>
           {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
+        </div>
+      </div>
+      <div>
+        <h3>The LockBox:</h3>
+        <div className = "lockbox_menu">
+          <div className="review-input">
+            <textarea placeholder="Write a review..."></textarea>
+            <button type="button" onClick={handleAddReview}>Post</button>
+          </div>
         </div>
       </div>
     </main>
