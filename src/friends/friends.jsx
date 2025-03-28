@@ -44,9 +44,12 @@ export function Friends() {
 
   const handleAddFriend = async () => {
     if (newFriend.trim() !== '') {
+      // Generate a random integer between 1 and 1000
+      const randomId = Math.floor(Math.random() * 1000) + 1;
+      let imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomId}.png`;
       const newFriendObj = {
         name: newFriend,
-        imgSrc: 'https://ih1.redbubble.net/image.1082756148.9909/fposter,small,wall_texture,square_product,600x600.u1.jpg', // Default image
+        imgSrc: imgSrc,
       };
 
       try {
