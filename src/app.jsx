@@ -22,21 +22,23 @@ export default function App() {
           {user && <p className="userName">{user}</p>}
         </ul>
 
-        <Routes>
-          <Route path='/' element={<Login setUser={setUser}/>} exact />
-          <Route path='/vault' element={
-            <PrivateRoute user={user}>
-              <Vault />
-            </PrivateRoute>
-          } />
-          <Route path='/info' element={<Info />} />
-          <Route path='/friends' element={
-            <PrivateRoute user={user}>
-              <Friends />
-            </PrivateRoute>
-          } />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        <div className="page-wrapper">
+          <Routes>
+            <Route path='/' element={<Login setUser={setUser}/>} exact />
+            <Route path='/vault' element={
+              <PrivateRoute user={user}>
+                <Vault />
+              </PrivateRoute>
+            } />
+            <Route path='/info' element={<Info />} />
+            <Route path='/friends' element={
+              <PrivateRoute user={user}>
+                <Friends />
+              </PrivateRoute>
+            } />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </div>
 
         <footer>
           <div></div>

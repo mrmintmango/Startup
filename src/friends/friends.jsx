@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './friendsStyle.css';
 import { useNavigate } from 'react-router-dom';
+import { Dropdown } from 'bootstrap';
 
 export function Friends() {
   const navigate = useNavigate();
   const [friends, setFriends] = useState([]);
   const [newFriend, setNewFriend] = useState('');
   const [errorMessage, setErrorMessage] = useState(''); // State to store error messages
+  const [reviews, setReviews] = useState([]); // State to store reviews
+  const [newReview, setNewReview] = useState(''); // State for the new review input
+
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -33,8 +37,8 @@ export function Friends() {
   }, []);
 
   const handleFriendClick = (friendName) => {
-    // Navigate to the friend's vault or start a new message thread
-    navigate(`/vault?friend=${friendName}`);
+    //start a new message that is addressed to the friend
+    setNewReview( newReview + `@${friendName} `);
   };
 
   const handleNewFriendChange = (event) => {
@@ -131,8 +135,18 @@ export function Friends() {
         <h3>The LockBox:</h3>
         <div className = "lockbox_menu">
           <div className="review-input">
-            <textarea placeholder="Write a review..."></textarea>
+            <select>
+            <option value="" disabled>Select a game</option>
+            </select>
+            <textarea placeholder="Write a review..." value={newReview} onChange={handleNewReviewChange}></textarea>
             <button type="button" onClick={handleAddReview}>Post</button>
+          </div>
+          <div className="review-scrollmenu">
+            {reviews.map((review, index) => (
+              <div key={index} className="review-block">
+                <p>{review}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

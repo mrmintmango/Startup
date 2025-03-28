@@ -34,15 +34,32 @@ li a:hover {
     background-color: #27f0a6;
     color: black;
 }
-footer{
-    background-color: #27f0a6;
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    height: 4vw;
-    width: 100%;
+/* Ensure the body and html take up the full height */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-footer a{
+
+/* Wrapper for the content */
+.page-wrapper {
+    flex: 1; /* This makes the content area take up the remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Footer styles */
+footer {
+    background-color: #27f0a6;
+    height: 3vw;
+    width: 100%;
+    text-align: center;
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+footer a {
     float: right;
     display: flex;
     color: #111;
@@ -50,7 +67,8 @@ footer a{
     text-align: right;
     padding: 8px 10px;
 }
-footer p{
+
+footer p {
     float: left;
     display: flex;
     font-size: 2em;
