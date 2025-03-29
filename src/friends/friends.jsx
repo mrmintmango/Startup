@@ -129,9 +129,15 @@ export function Friends() {
 
   const handleAddReview = () => {
     if (newReview.trim() !== '') {
-      setReviews([...reviews, newReview]); // Add the new review to the reviews list
+      setReviews([
+        ...reviews,
+        {
+          text: newReview, // Add the review text
+          game: selectedGame, // Add the selected game object
+        },
+      ]);
       setNewReview(''); // Clear the input field
-      setSelectedGame(null);
+      setSelectedGame(null); // Clear the selected game
     }
   };
 
@@ -178,7 +184,7 @@ export function Friends() {
             {reviews.map((review, index) => (
               <div key={index} className="review-block">
                 <p>{review.text}</p>
-                {review.game && <img src={review.game.imgSrc} alt={review.game.name} />}
+                {review.game && <img src={review.game.imgSrc} alt={review.game.name}></img>}
               </div>
             ))}
           </div>
