@@ -33,10 +33,31 @@ export function Friends() {
       } catch (error) {
         console.error('Error fetching friends list:', error);
       }
-    };
+  };
 
-    fetchFriends();
-  }, []);
+  const fetchGames = async () => {
+    try {
+      const response = await fetch('/api/auth/vault', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setGames(['none',...data.videoGames, ...data.boardGames, ...data.cardGames]); // Combine all game types
+      } else {
+        console.error('Failed to fetch games');
+      }
+    } catch (error) {
+      console.error('Error fetching games:', error);
+    }
+  };
+
+  fetchFriends();
+  fetchGames();
+}, []);
 
   const handleFriendClick = (friendName) => {
     //start a new message that is addressed to the friend
