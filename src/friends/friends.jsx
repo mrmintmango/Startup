@@ -121,10 +121,17 @@ export function Friends() {
     setNewReview(event.target.value);
   };
 
+  const handleGameSelect = (event) => {
+    const gameName = event.target.value;
+    const game = games.find((g) => g.name === gameName);
+    setSelectedGame(game);
+  };
+
   const handleAddReview = () => {
     if (newReview.trim() !== '') {
       setReviews([...reviews, newReview]); // Add the new review to the reviews list
       setNewReview(''); // Clear the input field
+      setSelectedGame(null);
     }
   };
 
@@ -158,7 +165,7 @@ export function Friends() {
         <h3>The LockBox:</h3>
         <div className = "lockbox_menu">
           <div className="review-input">
-            <select>
+            <select onChange={handleGameSelect} value={selectedGame?.name || ''}>
             <option value="" disabled>Select a game</option>
             {games.map((game, index) => (
                 <option key={index} value={game.name}>{game.name}</option>
@@ -170,7 +177,8 @@ export function Friends() {
           <div className="review-scrollmenu">
             {reviews.map((review, index) => (
               <div key={index} className="review-block">
-                <p>{review}</p>
+                <p>{review.text}</p>
+                {review.game && <img src={review.game.imgSrc} alt={review.game.name} />}
               </div>
             ))}
           </div>
