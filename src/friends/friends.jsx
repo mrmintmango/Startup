@@ -183,7 +183,7 @@ export function Friends() {
           <div className="review-scrollmenu">
             {reviews.map((review, index) => (
               <div key={index} className="review-block">
-                <p>{review.text}</p>
+                <p>You:</p><p>{review.text}</p>
                 {review.game && <img src={review.game.imgSrc} alt={review.game.name}></img>}
               </div>
             ))}
