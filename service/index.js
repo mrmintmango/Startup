@@ -323,10 +323,10 @@ async function createUser(username, password) {
     username: username,
     password: passwordHash,
     token: uuid.v4(),
-    videoGames: [], // Initialize an empty video games list for the user
-    boardGames: [], // Initialize an empty board games list for the user
-    cardGames: [], // Initialize an empty card games list for the user
-    friends: [] // Initialize an empty friends list for the user
+    videoGames: [], 
+    boardGames: [], 
+    cardGames: [], 
+    friends: [] 
   };
   await DB.addUser(user); // Save the user to the database
 

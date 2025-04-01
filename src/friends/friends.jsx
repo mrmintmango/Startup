@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './friendsStyle.css';
 import { useNavigate } from 'react-router-dom';
-import { Dropdown } from 'bootstrap';
 
 export function Friends() {
   const navigate = useNavigate();
@@ -162,6 +161,11 @@ export function Friends() {
     }
   };
 
+//now it's websockett time!
+
+
+
+
   return (
     <main className="friendmain">
       <div>
@@ -201,6 +205,7 @@ export function Friends() {
             <textarea placeholder="Write a review..." value={newReview} onChange={handleNewReviewChange}></textarea>
             <button type="button" onClick={handleAddReview}>Post</button>
           </div>
+          
           <div className="review-scrollmenu">
             {reviews.map((review, index) => (
               <div key={index} className="review-block">
@@ -210,6 +215,7 @@ export function Friends() {
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </main>
