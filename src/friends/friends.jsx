@@ -12,7 +12,7 @@ export function Friends() {
   const [newReview, setNewReview] = useState(''); // State for the new review input
   const [games, setGames] = useState([]); // State to store the user's games
   const [selectedGame, setSelectedGame] = useState(null); // State for the selected game
-
+  const [currentUser, setCurrentUser] = useState(''); // State to store the current user's name
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -55,6 +55,27 @@ export function Friends() {
     }
   };
 
+  const fetchCurrentUser = async () => {
+    try {
+      const response = await fetch('/api/auth/currentUser', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCurrentUser(data.username); // Assuming the backend returns { username: 'JohnDoe' }
+      } else {
+        console.error('Failed to fetch current user');
+      }
+    } catch (error) {
+      console.error('Error fetching current user:', error);
+    }
+  };
+
+  fetchCurrentUser();
   fetchFriends();
   fetchGames();
 }, []);
@@ -183,7 +204,8 @@ export function Friends() {
           <div className="review-scrollmenu">
             {reviews.map((review, index) => (
               <div key={index} className="review-block">
-                <p>You:</p><p>{review.text}</p>
+                <p className="username">{currentUser}: </p>
+                <p>{review.text}</p>
                 {review.game && <img src={review.game.imgSrc} alt={review.game.name}></img>}
               </div>
             ))}

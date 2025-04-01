@@ -110,6 +110,22 @@ apiRouter.get('/auth/friends', verifyAuth, async (req, res) => {
   }
 });
 
+// Get the current user's name
+apiRouter.get('/auth/currentUser', verifyAuth, async (req, res) => {
+  try {
+    const user = await DB.getUserByToken(req.cookies[authCookieName]);
+
+    if (user) {
+      res.json({ username: user.username }); // Return the current user's name
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error fetching current user:', error);
+    res.status(500).send({ msg: 'Internal server error' });
+  }
+});
+
 // Add a new friend to the user's friends list
 apiRouter.put('/auth/friends', verifyAuth, async (req, res) => {
   try {
