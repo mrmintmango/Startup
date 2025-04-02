@@ -162,8 +162,28 @@ export function Friends() {
   };
 
 //now it's websockett time!
+  useEffect(() => {
+    const socket = new WebSocket('ws://localhost:4000/ws'); // Adjust the URL as needed
 
+    socket.onopen = () => {
+      console.log('WebSocket connection established');
+    };
 
+    socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      if (message.type === 'review') {
+        setReviews((prevReviews) => [...prevReviews, message.review]);
+      }
+    };
+
+    socket.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, []);
 
 
   return (

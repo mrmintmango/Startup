@@ -1,19 +1,10 @@
 const { WebSocketServer } = require('ws');
-const express = require('express');
-const app = express();
 
-// Serve up the chat frontend
-app.use(express.static('./public'));
+function peerProxy(httpServer) {
+  // Create a websocket object
+  const socketServer = new WebSocketServer({ server: httpServer });
 
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
-server = app.listen(port, () => {
-  console.log(`Listening on ${port}`);
-});
-
-// Create a websocket object
-const socketServer = new WebSocketServer({ server });
-
-socketServer.on('connection', (socket) => {
+  socketServer.on('connection', (socket) => {
     socket.isAlive = true;
   
     // Forward messages to everyone except the sender
@@ -40,3 +31,6 @@ socketServer.on('connection', (socket) => {
       client.ping();
     });
   }, 10000);
+}
+
+module.exports = { peerProxy };
