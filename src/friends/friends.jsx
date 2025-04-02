@@ -12,6 +12,9 @@ export function Friends() {
   const [games, setGames] = useState([]); // State to store the user's games
   const [selectedGame, setSelectedGame] = useState(null); // State for the selected game
   const [currentUser, setCurrentUser] = useState(''); // State to store the current user's name
+  const [connectionStatus, setConnectionStatus] = useState('disconnected'); // State for WebSocket connection status
+  const [chatClient, setChatClient] = useState(null); // State to store the ChatClient instance
+
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -74,9 +77,24 @@ export function Friends() {
     }
   };
 
+  // Initialize WebSocket connection
+  const chatClientInstance = new ChatClient();
+  setChatClient(chatClientInstance);
+
+  chatClientInstance.addObserver(({ event }) => {
+    if (event === 'system') {
+      setConnectionStatus(chatClientInstance.connected ? 'connected' : 'disconnected');
+    }
+  });
+
   fetchCurrentUser();
   fetchFriends();
   fetchGames();
+
+  return () => {
+    // Clean up WebSocket connection on component unmount
+    chatClientInstance.socket.close();
+  };
 }, []);
 
   const handleFriendClick = (friendName) => {
@@ -149,42 +167,22 @@ export function Friends() {
 
   const handleAddReview = () => {
     if (newReview.trim() !== '') {
-      setReviews([
-        ...reviews,
-        {
-          text: newReview, // Add the review text
-          game: selectedGame, // Add the selected game object
-        },
-      ]);
-      setNewReview(''); // Clear the input field
-      setSelectedGame(null); // Clear the selected game
+      const review = {
+        text: newReview,
+        game: selectedGame,
+        user: currentUser,
+      };
+
+      setReviews([...reviews, review]);
+      setNewReview('');
+      setSelectedGame(null);
+
+      // Send the review over WebSocket
+      if (chatClient) {
+        chatClient.sendMessage(currentUser, review);
+      }
     }
   };
-
-//now it's websockett time!
-  useEffect(() => {
-    const socket = new WebSocket('ws://localhost:4000/ws'); // Adjust the URL as needed
-
-    socket.onopen = () => {
-      console.log('WebSocket connection established');
-    };
-
-    socket.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      if (message.type === 'review') {
-        setReviews((prevReviews) => [...prevReviews, message.review]);
-      }
-    };
-
-    socket.onclose = () => {
-      console.log('WebSocket connection closed');
-    };
-
-    return () => {
-      socket.close();
-    };
-  }, []);
-
 
   return (
     <main className="friendmain">
@@ -223,15 +221,20 @@ export function Friends() {
               ))}
             </select>
             <textarea placeholder="Write a review..." value={newReview} onChange={handleNewReviewChange}></textarea>
-            <button type="button" onClick={handleAddReview}>Post</button>
+            <div className="post-section">
+              <button type="button" onClick={handleAddReview}>Post</button>
+              <span className={`connection-status ${connectionStatus}`}>
+                {connectionStatus === 'connected' ? 'Connected' : 'Disconnected'}
+              </span>
+            </div>
           </div>
           
           <div className="review-scrollmenu">
             {reviews.map((review, index) => (
               <div key={index} className="review-block">
-                <p className="username">{currentUser}: </p>
+                <p className="username">{review.user}:</p>
                 <p>{review.text}</p>
-                {review.game && <img src={review.game.imgSrc} alt={review.game.name}></img>}
+                {review.game && <img src={review.game.imgSrc} alt={review.game.name} />}
               </div>
             ))}
           </div>
@@ -240,4 +243,48 @@ export function Friends() {
       </div>
     </main>
   );
+}
+
+class ChatClient {
+  observers = [];
+  connected = false;
+
+  constructor() {
+    // Adjust the webSocket protocol to what is being used for HTTP
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+    // Display that we have opened the webSocket
+    this.socket.onopen = (event) => {
+      this.notifyObservers('system', 'websocket', 'connected');
+      this.connected = true;
+    };
+
+    // Display messages we receive from our friends
+    this.socket.onmessage = async (event) => {
+      const text = await event.data.text();
+      const chat = JSON.parse(text);
+      this.notifyObservers('received', chat.name, chat.msg);
+    };
+
+    // If the webSocket is closed then disable the interface
+    this.socket.onclose = (event) => {
+      this.notifyObservers('system', 'websocket', 'disconnected');
+      this.connected = false;
+    };
+  }
+
+  // Send a message over the webSocket
+  sendMessage(name, msg) {
+    this.notifyObservers('sent', 'me', msg);
+    this.socket.send(JSON.stringify({ name, msg }));
+  }
+
+  addObserver(observer) {
+    this.observers.push(observer);
+  }
+
+  notifyObservers(event, from, msg) {
+    this.observers.forEach((h) => h({ event, from, msg }));
+  }
 }

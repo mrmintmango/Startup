@@ -153,3 +153,22 @@ input[type="search"]{
   .review-block .username {
     color: rgb(78, 176, 78);
   }
+
+  .post-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .connection-status {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .connection-status.connected {
+    color: green;
+  }
+  
+  .connection-status.disconnected {
+    color: red;
+  }
