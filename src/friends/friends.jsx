@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './friendsStyle.css';
 import { useNavigate } from 'react-router-dom';
 
+
 export function Friends() {
   const navigate = useNavigate();
   const [friends, setFriends] = useState([]);
@@ -13,10 +14,29 @@ export function Friends() {
   const [selectedGame, setSelectedGame] = useState(null); // State for the selected game
   const [currentUser, setCurrentUser] = useState(''); // State to store the current user's name
   const [connectionStatus, setConnectionStatus] = useState('disconnected'); // State for WebSocket connection status
-  const [chatClient, setChatClient] = useState(null); // State to store the ChatClient instance
-
+  const chatClient = new ChatClient(); // Create an instance of the ChatClient
 
   useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await fetch('/api/auth/currentUser', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          setCurrentUser(data.username); // Assuming the backend returns { username: 'JohnDoe' }
+        } else {
+          console.error('Failed to fetch current user');
+        }
+      } catch (error) {
+        console.error('Error fetching current user:', error);
+      }
+    };
+
     const fetchFriends = async () => {
       try {
         const response = await fetch('/api/auth/friends', {
@@ -57,44 +77,16 @@ export function Friends() {
     }
   };
 
-  const fetchCurrentUser = async () => {
-    try {
-      const response = await fetch('/api/auth/currentUser', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setCurrentUser(data.username); // Assuming the backend returns { username: 'JohnDoe' }
-      } else {
-        console.error('Failed to fetch current user');
+    // Add an observer to the ChatClient to update connection status
+    chatClient.addObserver(({ event }) => {
+      if (event === 'system') {
+        setConnectionStatus(chatClient.connected ? 'connected' : 'disconnected');
       }
-    } catch (error) {
-      console.error('Error fetching current user:', error);
-    }
-  };
-
-  // Initialize WebSocket connection
-  const chatClientInstance = new ChatClient();
-  setChatClient(chatClientInstance);
-
-  chatClientInstance.addObserver(({ event }) => {
-    if (event === 'system') {
-      setConnectionStatus(chatClientInstance.connected ? 'connected' : 'disconnected');
-    }
-  });
+    });
 
   fetchCurrentUser();
   fetchFriends();
   fetchGames();
-
-  return () => {
-    // Clean up WebSocket connection on component unmount
-    chatClientInstance.socket.close();
-  };
 }, []);
 
   const handleFriendClick = (friendName) => {
@@ -178,9 +170,7 @@ export function Friends() {
       setSelectedGame(null);
 
       // Send the review over WebSocket
-      if (chatClient) {
-        chatClient.sendMessage(currentUser, review);
-      }
+      chatClient.sendMessage(currentUser, review);
     }
   };
 
@@ -250,12 +240,23 @@ class ChatClient {
   connected = false;
 
   constructor() {
-    // Adjust the webSocket protocol to what is being used for HTTP
-    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    if (ChatClient.instance) {
+      return ChatClient.instance; // Return the existing instance if it already exists
+    }
 
-    // Display that we have opened the webSocket
-    this.socket.onopen = (event) => {
+    let port = window.location.port;
+    if (window.location.port === '5173') {
+      port = '4000'; // Override the port if running in development
+    }
+
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const host = window.location.hostname; // Use hostname without port
+    const socketUrl = port ? `${protocol}://${host}:${port}/ws` : `${protocol}://${window.location.host}/ws`;
+
+    this.socket = new WebSocket(socketUrl);
+
+    // Display that we have opened the WebSocket
+    this.socket.onopen = () => {
       this.notifyObservers('system', 'websocket', 'connected');
       this.connected = true;
     };
@@ -267,14 +268,16 @@ class ChatClient {
       this.notifyObservers('received', chat.name, chat.msg);
     };
 
-    // If the webSocket is closed then disable the interface
-    this.socket.onclose = (event) => {
+    // If the WebSocket is closed then disable the interface
+    this.socket.onclose = () => {
       this.notifyObservers('system', 'websocket', 'disconnected');
       this.connected = false;
     };
+
+    ChatClient.instance = this; // Save the instance
   }
 
-  // Send a message over the webSocket
+  // Send a message over the WebSocket
   sendMessage(name, msg) {
     this.notifyObservers('sent', 'me', msg);
     this.socket.send(JSON.stringify({ name, msg }));
@@ -288,3 +291,5 @@ class ChatClient {
     this.observers.forEach((h) => h({ event, from, msg }));
   }
 }
+
+//export default new ChatClient(); // Export a singleton instance
