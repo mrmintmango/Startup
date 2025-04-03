@@ -348,6 +348,11 @@ function setAuthCookie(res, authToken) {
   });
 }
 
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self'; connect-src 'self' ws://localhost:4000");
+  next();
+});
+
 const httpService = app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });
