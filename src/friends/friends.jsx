@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./friendsStyle.css";
 import { useNavigate } from "react-router-dom";
+import { ChatEvent, ChatNotifier } from "./chat"; // Import the ChatClient class
+//const chatClient = new ChatClient(); // Create an instance of the ChatClient
+
+console.log("ChatNotifier", ChatNotifier.connected); // Log the ChatClient instance
 
 export function Friends() {
   const navigate = useNavigate();
@@ -12,8 +16,25 @@ export function Friends() {
   const [games, setGames] = useState([]); // State to store the user's games
   const [selectedGame, setSelectedGame] = useState(null); // State for the selected game
   const [currentUser, setCurrentUser] = useState(""); // State to store the current user's name
-  const [connectionStatus, setConnectionStatus] = useState("never activated"); // State for WebSocket connection status
-  const chatClient = new ChatClient(); // Create an instance of the ChatClient
+  const [connectionStatus, setConnectionStatus] = useState("disconnected"); // State for WebSocket connection status
+
+  // React.useEffect(() => {
+  //   ChatNotifier.addHandler(handleMessageEvent);
+  //   // Check the connection status and update the state accordingly
+  //   if (ChatNotifier.connected) {
+  //     setConnectionStatus("connected");
+  //   } else {
+  //     setConnectionStatus("disconnected");
+  //   }
+
+  //   return () => {
+  //     ChatNotifier.removeHandler(handleMessageEvent);
+  //   };
+  // });
+
+  function handleMessageEvent(review) {
+    setReviews([...reviews, review]);
+  }
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -81,18 +102,21 @@ export function Friends() {
       }
     };
 
-    // Add an observer to the ChatClient to update connection status
-    chatClient.addObserver(({ event }) => {
-      if (event === "system") {
-        setConnectionStatus(
-          chatClient.connected ? "connected" : "disconnected"
-        );
-      }
-    });
-
     fetchCurrentUser();
     fetchFriends();
     fetchGames();
+
+    ChatNotifier.addHandler(handleMessageEvent);
+    // Check the connection status and update the state accordingly
+    if (ChatNotifier.connected) {
+      setConnectionStatus("connected");
+    } else {
+      setConnectionStatus("disconnected");
+    }
+
+    return () => {
+      ChatNotifier.removeHandler(handleMessageEvent);
+    };
   }, []);
 
   const handleFriendClick = (friendName) => {
@@ -177,12 +201,12 @@ export function Friends() {
         user: currentUser,
       };
 
+      const img = selectedGame ? selectedGame.imgSrc : null; // Get the image source from the selected game
+      ChatNotifier.broadcastMessage(currentUser, img, newReview); // Send the review to the server
+
       setReviews([...reviews, review]);
       setNewReview("");
       setSelectedGame(null);
-
-      // Send the review over WebSocket
-      chatClient.sendMessage(currentUser, review);
     }
   };
 
@@ -270,116 +294,3 @@ export function Friends() {
     </main>
   );
 }
-
-class ChatClient {
-  observers = [];
-  connected = false;
-
-  constructor() {
-    if (ChatClient.instance) {
-      return ChatClient.instance; // Return the existing instance if it already exists
-    }
-
-    let port = window.location.port;
-    if (window.location.port === "5173") {
-      port = "4000"; // Override the port if running in development
-    }
-
-    const protocol = window.location.protocol === "http:" ? "ws" : "wss";
-    const socketUrl = `${protocol}://${window.location.hostname}:${port}/ws`;
-
-    this.socket = new WebSocket(socketUrl);
-
-    // Display that we have opened the WebSocket
-    this.socket.onopen = () => {
-      this.notifyObservers("system", "websocket", "connected");
-      this.connected = true;
-    };
-
-    // Display messages we receive from our friends
-    this.socket.onmessage = async (event) => {
-      const text = await event.data.text();
-      const chat = JSON.parse(text);
-      this.notifyObservers("received", chat.name, chat.msg);
-    };
-
-    // If the WebSocket is closed then disable the interface
-    this.socket.onclose = () => {
-      this.notifyObservers("system", "websocket", "disconnected");
-      this.connected = false;
-    };
-
-    ChatClient.instance = this; // Save the instance
-  }
-
-  // Send a message over the WebSocket
-  sendMessage(name, msg) {
-    this.notifyObservers("sent", "me", msg);
-    this.socket.send(JSON.stringify({ name, msg }));
-  }
-
-  addObserver(observer) {
-    this.observers.push(observer);
-  }
-
-  notifyObservers(event, from, msg) {
-    this.observers.forEach((h) => h({ event, from, msg }));
-  }
-}
-
-// class ChatClient {
-//   observers = [];
-//   connected = false;
-
-//   constructor() {
-//     if (ChatClient.instance) {
-//       return ChatClient.instance; // Return the existing instance if it already exists
-//     }
-
-//     let port = window.location.port;
-//     if (window.location.port === '5173') {
-//       port = '4000'; // Override the port if running in development
-//     }
-
-//     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-//     const host = window.location.hostname; // Use hostname without port
-//     const socketUrl = port ? `${protocol}://${host}:${port}/ws` : `${protocol}://${window.location.host}/ws`;
-
-//     this.socket = new WebSocket(socketUrl);
-
-//     // Display that we have opened the WebSocket
-//     this.socket.onopen = () => {
-//       this.notifyObservers('system', 'websocket', 'connected');
-//       this.connected = true;
-//     };
-
-//     // Display messages we receive from our friends
-//     this.socket.onmessage = async (event) => {
-//       const text = await event.data.text();
-//       const chat = JSON.parse(text);
-//       this.notifyObservers('received', chat.name, chat.msg);
-//     };
-
-//     // If the WebSocket is closed then disable the interface
-//     this.socket.onclose = () => {
-//       this.notifyObservers('system', 'websocket', 'disconnected');
-//       this.connected = false;
-//     };
-
-//     ChatClient.instance = this; // Save the instance
-//   }
-
-//   // Send a message over the WebSocket
-//   sendMessage(name, msg) {
-//     this.notifyObservers('sent', 'me', msg);
-//     this.socket.send(JSON.stringify({ name, msg }));
-//   }
-
-//   addObserver(observer) {
-//     this.observers.push(observer);
-//   }
-
-//   notifyObservers(event, from, msg) {
-//     this.observers.forEach((h) => h({ event, from, msg }));
-//   }
-// }
