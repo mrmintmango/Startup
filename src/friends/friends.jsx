@@ -18,20 +18,6 @@ export function Friends() {
   const [currentUser, setCurrentUser] = useState(""); // State to store the current user's name
   const [connectionStatus, setConnectionStatus] = useState("disconnected"); // State for WebSocket connection status
 
-  // React.useEffect(() => {
-  //   ChatNotifier.addHandler(handleMessageEvent);
-  //   // Check the connection status and update the state accordingly
-  //   if (ChatNotifier.connected) {
-  //     setConnectionStatus("connected");
-  //   } else {
-  //     setConnectionStatus("disconnected");
-  //   }
-
-  //   return () => {
-  //     ChatNotifier.removeHandler(handleMessageEvent);
-  //   };
-  // });
-
   function handleMessageEvent(review) {
     setReviews([...reviews, review]);
   }
@@ -194,14 +180,14 @@ export function Friends() {
   };
 
   const handleAddReview = () => {
+    const img = selectedGame ? selectedGame.imgSrc : null;
     if (newReview.trim() !== "") {
       const review = {
-        text: newReview,
-        game: selectedGame,
-        user: currentUser,
+        value: newReview,
+        img: img,
+        from: currentUser,
       };
 
-      const img = selectedGame ? selectedGame.imgSrc : null; // Get the image source from the selected game
       ChatNotifier.broadcastMessage(currentUser, img, newReview); // Send the review to the server
 
       setReviews([...reviews, review]);
@@ -209,6 +195,20 @@ export function Friends() {
       setSelectedGame(null);
     }
   };
+
+  function createMessagesArray(messages) {
+    const messageArray = [];
+    for (const [i, review] of messages.entries()) {
+      messageArray.push(
+        <div key={i} className="review-block">
+          <p className="username">{review.from}:</p>
+          <p>{review.value}</p>
+          <img src={review.img} />
+        </div>
+      );
+    }
+    return messageArray;
+  }
 
   return (
     <main className="friendmain">
@@ -279,15 +279,7 @@ export function Friends() {
           </div>
 
           <div className="review-scrollmenu">
-            {reviews.map((review, index) => (
-              <div key={index} className="review-block">
-                <p className="username">{review.user}:</p>
-                <p>{review.text}</p>
-                {review.game && (
-                  <img src={review.game.imgSrc} alt={review.game.name} />
-                )}
-              </div>
-            ))}
+            {createMessagesArray(reviews)}
           </div>
         </div>
       </div>
