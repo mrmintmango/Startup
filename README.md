@@ -130,8 +130,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - I implemented the backend for websocket so it pings and pongs and becomes a hub for the clients to use. 
+- [x] **Frontend makes WebSocket connection** - It took me a long while but I figured out how to get websocket connected on the fronted between clients.
+- [x] **Data sent over WebSocket connection** - I was able to send messages and even images between clients in a simple chat feature.
+- [x] **WebSocket data displayed** - Messages appear and are updated when sent between clients and even stay when the user leaves the friends page and comes back.
+- [x] **Application is fully functional** - So let it be written, so let it be done. (It's finally done woohoo!!) 
