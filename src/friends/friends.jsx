@@ -2,21 +2,28 @@ import React, { useState, useEffect } from "react";
 import "./friendsStyle.css";
 import { useNavigate } from "react-router-dom";
 import { ChatEvent, ChatNotifier } from "./chat"; // Import the ChatClient class
-//const chatClient = new ChatClient(); // Create an instance of the ChatClient
 
-console.log("ChatNotifier", ChatNotifier.connected); // Log the ChatClient instance
+//console.log("ChatNotifier", ChatNotifier.connected); // Log the ChatClient instance
 
 export function Friends() {
   const navigate = useNavigate();
   const [friends, setFriends] = useState([]);
   const [newFriend, setNewFriend] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // State to store error messages
-  const [reviews, setReviews] = useState([]); // State to store reviews
+  const [reviews, setReviews] = React.useState([]); // State to store reviews
   const [newReview, setNewReview] = useState(""); // State for the new review input
   const [games, setGames] = useState([]); // State to store the user's games
   const [selectedGame, setSelectedGame] = useState(null); // State for the selected game
   const [currentUser, setCurrentUser] = useState(""); // State to store the current user's name
   const [connectionStatus, setConnectionStatus] = useState("disconnected"); // State for WebSocket connection status
+
+  React.useEffect(() => {
+    ChatNotifier.addHandler(handleMessageEvent);
+
+    return () => {
+      ChatNotifier.removeHandler(handleMessageEvent);
+    };
+  }, []);
 
   function handleMessageEvent(review) {
     setReviews([...reviews, review]);
@@ -92,17 +99,12 @@ export function Friends() {
     fetchFriends();
     fetchGames();
 
-    ChatNotifier.addHandler(handleMessageEvent);
     // Check the connection status and update the state accordingly
     if (ChatNotifier.connected) {
       setConnectionStatus("connected");
     } else {
       setConnectionStatus("disconnected");
     }
-
-    return () => {
-      ChatNotifier.removeHandler(handleMessageEvent);
-    };
   }, []);
 
   const handleFriendClick = (friendName) => {
@@ -188,22 +190,22 @@ export function Friends() {
         from: currentUser,
       };
 
-      ChatNotifier.broadcastMessage(currentUser, img, newReview); // Send the review to the server
-
       setReviews([...reviews, review]);
       setNewReview("");
       setSelectedGame(null);
+
+      ChatNotifier.broadcastMessage(currentUser, img, newReview); // Send the review to the server
     }
   };
 
-  function createMessagesArray(messages) {
+  function createMessagesArray() {
     const messageArray = [];
-    for (const [i, review] of messages.entries()) {
+    for (const [i, review] of reviews.entries()) {
       messageArray.push(
         <div key={i} className="review-block">
           <p className="username">{review.from}:</p>
           <p>{review.value}</p>
-          <img src={review.img} />
+          <img src={review.img}></img>
         </div>
       );
     }
@@ -278,9 +280,7 @@ export function Friends() {
             </div>
           </div>
 
-          <div className="review-scrollmenu">
-            {createMessagesArray(reviews)}
-          </div>
+          <div className="review-scrollmenu">{createMessagesArray()}</div>
         </div>
       </div>
     </main>
