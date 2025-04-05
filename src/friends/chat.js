@@ -52,19 +52,29 @@ class ChatEventNotifier {
   }
 
   removeHandler(handler) {
-    this.handlers.filter((h) => h !== handler);
+    this.handlers = this.handlers.filter((h) => h !== handler);
   }
 
   receiveMessage(event) {
-    this.events.push(event);
+    this.events.push(event); // Store the event for potential future use
 
-    this.events.forEach((e) => {
-      this.handlers.forEach((handler) => {
-        handler(e);
-      });
+    // Only process the new event
+    this.handlers.forEach((handler) => {
+      handler(event);
     });
   }
 }
+
+//   receiveMessage(event) {
+//     this.events.push(event);
+
+//     this.events.forEach((e) => {
+//       this.handlers.forEach((handler) => {
+//         handler(e);
+//       });
+//     });
+//   }
+// }
 
 const ChatNotifier = new ChatEventNotifier();
 export { ChatEvent, ChatNotifier };

@@ -17,17 +17,85 @@ export function Friends() {
   const [currentUser, setCurrentUser] = useState(""); // State to store the current user's name
   const [connectionStatus, setConnectionStatus] = useState("disconnected"); // State for WebSocket connection status
 
-  React.useEffect(() => {
-    ChatNotifier.addHandler(handleMessageEvent);
+  function Conversation({ webSocket }) {
+    const handlerRef = React.useRef(null); // Use a ref to store the handler
 
-    return () => {
-      ChatNotifier.removeHandler(handleMessageEvent);
-    };
-  }, []);
+    useEffect(() => {
+      // Define the handler
+      const handler = (chat) => {
+        if (chat.from === "System" && chat.img === ChatEvent.System) {
+          setConnectionStatus("connected");
+        } else {
+          setReviews((prevMessages) => [...prevMessages, chat]);
+        }
+      };
 
-  function handleMessageEvent(review) {
-    setReviews([...reviews, review]);
+      // Store the handler in the ref
+      handlerRef.current = handler;
+
+      // Add the handler to the WebSocket
+      webSocket.addHandler(handler);
+
+      // Cleanup: Remove the handler when the component unmounts
+      return () => {
+        if (handlerRef.current) {
+          webSocket.removeHandler(handlerRef.current);
+        }
+      };
+    }, [webSocket]); // Only run this effect once when `webSocket` changes
+
+    const chatEls = reviews.map((review, index) => (
+      <div key={index} className="review-block">
+        <p className="username">{review.from}:</p>
+        <p>{review.value}</p>
+        {review.img && <img src={review.img} alt="Game" />}
+      </div>
+    ));
+
+    return (
+      <main>
+        <div id="chat-text">{chatEls}</div>
+      </main>
+    );
   }
+
+  // function Conversation({ webSocket }) {
+  //   useEffect(() => {
+  //     webSocket.addHandler((chat) => {
+  //       if (chat.from == "System" && chat.img == ChatEvent.System) {
+  //         setConnectionStatus("connected");
+  //       } else {
+  //         setReviews((prevMessages) => [...prevMessages, chat]);
+  //       }
+  //     });
+  //   }, [webSocket]);
+
+  //   const chatEls = reviews.map((review, index) => (
+  //     <div key={index} className="review-block">
+  //       <p className="username">{review.from}:</p>
+  //       <p>{review.value}</p>
+  //       <img src={review.img}></img>
+  //     </div>
+  //   ));
+
+  //   return (
+  //     <main>
+  //       <div id="chat-text">{chatEls}</div>
+  //     </main>
+  //   );
+  // }
+
+  // React.useEffect(() => {
+  //   ChatNotifier.addHandler(handleMessageEvent);
+
+  //   return () => {
+  //     ChatNotifier.removeHandler(handleMessageEvent);
+  //   };
+  // }, []);
+
+  // function handleMessageEvent(review) {
+  //   setReviews([...reviews, review]);
+  // }
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -198,19 +266,19 @@ export function Friends() {
     }
   };
 
-  function createMessagesArray() {
-    const messageArray = [];
-    for (const [i, review] of reviews.entries()) {
-      messageArray.push(
-        <div key={i} className="review-block">
-          <p className="username">{review.from}:</p>
-          <p>{review.value}</p>
-          <img src={review.img}></img>
-        </div>
-      );
-    }
-    return messageArray;
-  }
+  // function createMessagesArray() {
+  //   const messageArray = [];
+  //   for (const [i, review] of reviews.entries()) {
+  //     messageArray.push(
+  //       <div key={i} className="review-block">
+  //         <p className="username">{review.from}:</p>
+  //         <p>{review.value}</p>
+  //         <img src={review.img}></img>
+  //       </div>
+  //     );
+  //   }
+  //   return messageArray;
+  // }
 
   return (
     <main className="friendmain">
@@ -280,7 +348,8 @@ export function Friends() {
             </div>
           </div>
 
-          <div className="review-scrollmenu">{createMessagesArray()}</div>
+          <Conversation webSocket={ChatNotifier} />
+          {/* <div className="review-scrollmenu">{createMessagesArray()}</div> */}
         </div>
       </div>
     </main>

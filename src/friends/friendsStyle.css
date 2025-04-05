@@ -1,175 +1,179 @@
 .error-message {
-    color: rgb(252, 235, 235);
-    font-size: 16px;
-    margin-top: 10px;
-  }
+  color: rgb(252, 235, 235);
+  font-size: 16px;
+  margin-top: 10px;
+}
 h3 {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2vw;
-    text-align: center;
-    text-decoration: none;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2vw;
+  text-align: center;
+  text-decoration: none;
 }
-p{
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2vw;
-    text-align: center;
-    text-decoration: none;
+p {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2vw;
+  text-align: center;
+  text-decoration: none;
 }
-.friendmain{
-    background-color: grey;
+.friendmain {
+  background-color: grey;
 }
-body{
-    background-color: grey;
+body {
+  background-color: grey;
 }
-.center{
-    text-align: center;
+.center {
+  text-align: center;
 }
-div.scrollmenu{
-    background-color: aliceblue;
-    overflow: auto;
-    white-space: nowrap;
-    padding: 30px;
+div.scrollmenu {
+  background-color: aliceblue;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 30px;
 }
-div.scrollmenu img{
-    height: 200px;
-    width: auto;
-    padding: 10px;
+div.scrollmenu img {
+  height: 200px;
+  width: auto;
+  padding: 10px;
 }
-div.scrollmenu a{
-    display: contents;
-    color: rgb(70, 254, 70);
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
+div.scrollmenu a {
+  display: contents;
+  color: rgb(70, 254, 70);
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
 }
-li .game{
-    align-items: center;
-    border-right: 1px solid #bbb;
+li .game {
+  align-items: center;
+  border-right: 1px solid #bbb;
 }
-button{
-    border-radius: 4px;
-    border-color: aquamarine;
-    background-color: silver;
-    padding: auto;
+button {
+  border-radius: 4px;
+  border-color: aquamarine;
+  background-color: silver;
+  padding: auto;
 }
-input[type="search"]{
-    width: 20vw;
-    height: 2vw;
+input[type="search"] {
+  width: 20vw;
+  height: 2vw;
 }
 
 .friendmain {
-    text-align: center;
-  }
-  
-  .friend-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .friend-profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .friend-name {
-    margin-top: 5px;
-    font-size: 14px;
-    font-weight: bold;
-  }
+  text-align: center;
+}
 
-  .lockbox_menu {
-    border: 1px solid #ccc;
-    padding: 10px;
-    max-height: 300px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    background-color: #f9f9f9;
-  }
-  
-  .review-input {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  
-  .review-input select {
-    margin-bottom: 10px;
-    padding: 5px;
-    font-size: 14px;
-  }
-  .review-input textarea {
-    width: 100%;
-    height: 60px;
-    margin-bottom: 10px;
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .review-input button {
-    align-self: flex-end;
-    padding: 5px 10px;
-    font-size: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .review-input button:hover {
-    background-color: #0056b3;
-  }
-  
-  .review-scrollmenu {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .review-block {
-    color: black;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .review-block img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
+.friend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
 
-  .review-block .username {
-    color: rgb(78, 176, 78);
-  }
+.friend-profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-  .post-section {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .connection-status {
-    color: blue;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .connection-status.connected {
-    color: green;
-  }
-  
-  .connection-status.disconnected {
-    color: red;
-  }
+.friend-name {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.lockbox_menu {
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: #f9f9f9;
+}
+
+.review-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.review-input select {
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 14px;
+}
+.review-input textarea {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.review-input button {
+  align-self: flex-end;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.review-input button:hover {
+  background-color: #0056b3;
+}
+
+.review-scrollmenu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-block {
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-block img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.review-block .username {
+  color: rgb(78, 176, 78);
+}
+
+.post-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.connection-status {
+  color: blue;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.connection-status.connected {
+  color: green;
+}
+
+.connection-status.disconnected {
+  color: red;
+}
+
+#chat-text {
+  padding: 1em 0;
+}
