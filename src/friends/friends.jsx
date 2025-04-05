@@ -10,12 +10,33 @@ export function Friends() {
   const [friends, setFriends] = useState([]);
   const [newFriend, setNewFriend] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // State to store error messages
-  const [reviews, setReviews] = React.useState([]); // State to store reviews
+  const [reviews, setReviews] = useState([]); // State to store reviews
   const [newReview, setNewReview] = useState(""); // State for the new review input
   const [games, setGames] = useState([]); // State to store the user's games
   const [selectedGame, setSelectedGame] = useState(null); // State for the selected game
   const [currentUser, setCurrentUser] = useState(""); // State to store the current user's name
   const [connectionStatus, setConnectionStatus] = useState("disconnected"); // State for WebSocket connection status
+
+  // Save reviews to localStorage whenever they are updated
+  const saveReviewsToLocalStorage = (reviews) => {
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+    setReviews(reviews);
+  };
+
+  // Load reviews from localStorage on page load
+  useEffect(() => {
+    const savedReviews = localStorage.getItem("reviews");
+    if (savedReviews) {
+      setReviews(JSON.parse(savedReviews));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Cleanup function to save reviews to localStorage when the user leaves the page
+    return () => {
+      localStorage.setItem("reviews", JSON.stringify(reviews));
+    };
+  }, [reviews]);
 
   function Conversation({ webSocket }) {
     const handlerRef = React.useRef(null); // Use a ref to store the handler
@@ -58,44 +79,6 @@ export function Friends() {
       </main>
     );
   }
-
-  // function Conversation({ webSocket }) {
-  //   useEffect(() => {
-  //     webSocket.addHandler((chat) => {
-  //       if (chat.from == "System" && chat.img == ChatEvent.System) {
-  //         setConnectionStatus("connected");
-  //       } else {
-  //         setReviews((prevMessages) => [...prevMessages, chat]);
-  //       }
-  //     });
-  //   }, [webSocket]);
-
-  //   const chatEls = reviews.map((review, index) => (
-  //     <div key={index} className="review-block">
-  //       <p className="username">{review.from}:</p>
-  //       <p>{review.value}</p>
-  //       <img src={review.img}></img>
-  //     </div>
-  //   ));
-
-  //   return (
-  //     <main>
-  //       <div id="chat-text">{chatEls}</div>
-  //     </main>
-  //   );
-  // }
-
-  // React.useEffect(() => {
-  //   ChatNotifier.addHandler(handleMessageEvent);
-
-  //   return () => {
-  //     ChatNotifier.removeHandler(handleMessageEvent);
-  //   };
-  // }, []);
-
-  // function handleMessageEvent(review) {
-  //   setReviews([...reviews, review]);
-  // }
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -258,27 +241,13 @@ export function Friends() {
         from: currentUser,
       };
 
-      setReviews([...reviews, review]);
+      saveReviewsToLocalStorage([...reviews, review]);
       setNewReview("");
       setSelectedGame(null);
 
       ChatNotifier.broadcastMessage(currentUser, img, newReview); // Send the review to the server
     }
   };
-
-  // function createMessagesArray() {
-  //   const messageArray = [];
-  //   for (const [i, review] of reviews.entries()) {
-  //     messageArray.push(
-  //       <div key={i} className="review-block">
-  //         <p className="username">{review.from}:</p>
-  //         <p>{review.value}</p>
-  //         <img src={review.img}></img>
-  //       </div>
-  //     );
-  //   }
-  //   return messageArray;
-  // }
 
   return (
     <main className="friendmain">
